@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import type {AppProps} from 'next/app'
 import Head from "next/head";
+import ExternalScripts from "../components/scripts";
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
@@ -18,6 +19,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=3.0.2"/>
             </Head>
             <Component {...pageProps} />
+            <ExternalScripts/>
         </>
     )
 }
