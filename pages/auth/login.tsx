@@ -29,8 +29,9 @@ const LoginPage: NextPage = () => {
                         <div className="form-group">
                             <div className="form-label-group">
                                 <label className="form-label" htmlFor="password">Passcode</label>
-                                <Link className="link link-primary link-sm"
-                                   href="/auth/reset">Forgot Code?</Link>
+                                <Link href="/auth/reset">
+                                    <a className="link link-primary link-sm" >Forgot Code?</a>
+                                </Link>
                             </div>
                             <div className="form-control-wrap">
                                 <a href="#" className="form-icon form-icon-right passcode-switch lg"

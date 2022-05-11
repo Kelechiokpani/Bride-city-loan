@@ -31,7 +31,11 @@ const ResetPage: NextPage = () => {
                       </div>
                   </form>
                   <div className="form-note-s2 text-center pt-4">
-                      <Link href="/auth/login" className="link link-primary link-sm"><strong>Return to login</strong></Link>
+                      <Link href="/auth/login">
+                          <a className="link link-primary link-sm">
+                              <strong>Return to login</strong>
+                          </a>
+                      </Link>
                   </div>
               </div>
           </div>

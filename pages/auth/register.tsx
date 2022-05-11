@@ -55,8 +55,10 @@ const RegisterPage: NextPage = () => {
                             <button className="btn btn-lg btn-primary btn-block">Register</button>
                         </div>
                     </form>
-                    <div className="form-note-s2 text-center pt-4"> Already have an account? <Link
-                        href="/auth/login"><strong>Sign in instead</strong></Link>
+                    <div className="form-note-s2 text-center pt-4"> Already have an account?
+                        <Link  href="/auth/login">
+                        <a><strong>Sign in instead</strong></a>
+                    </Link>
                     </div>
                     <div className="text-center pt-4 pb-3">
                         <h6 className="overline-title overline-title-sap"><span>OR</span></h6>
