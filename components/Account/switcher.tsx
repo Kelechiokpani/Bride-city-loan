@@ -2,11 +2,16 @@ import {FC} from "react";
 import Link from "next/link";
 import classNames from "classnames";
 
-type Props = {
+type SwitcherProps = {
     activeTab: String
 }
-const Switcher: FC<Props> = ({activeTab}: Props) => {
-    const tabs = [
+
+type TabOption = {
+    name: String,
+    link: any
+}
+const Switcher: FC<SwitcherProps> = ({activeTab}: SwitcherProps) => {
+    const tabs:TabOption[] = [
         {
             "name": 'Personal',
             'link': '/account/'

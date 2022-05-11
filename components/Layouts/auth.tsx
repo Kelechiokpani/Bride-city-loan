@@ -1,9 +1,17 @@
 import {FC} from "react";
+import classNames from "classnames";
 
 type Props = {
     children?: JSX.Element | JSX.Element[]
+    wide?: boolean
 }
-const AuthLayout: FC<Props> = ({children}: Props) => {
+const AuthLayout: FC<Props> = ({ children, wide = false }: Props) => {
+    let containerSizingClasses = classNames([
+        'nk-block', 'nk-block-middle', 'nk-auth-body',
+    ], {
+        'wide-xs': !wide,
+        'wide-md': wide
+    })
     return (
         <>
             <div className={'nk-body bg-white npc-general pg-auth'}>
@@ -11,7 +19,7 @@ const AuthLayout: FC<Props> = ({children}: Props) => {
                     <div className="nk-main ">
                         <div className="nk-wrap nk-wrap-nosidebar">
                             <div className="nk-content ">
-                                <div className="nk-block nk-block-middle nk-auth-body  wide-xs">
+                                <div className={containerSizingClasses}>
                                     <div className="brand-logo pb-4 text-center">
                                         <a href="/" className="logo-link">
 

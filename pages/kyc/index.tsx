@@ -1,11 +1,12 @@
 import {NextPage} from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import Link from "next/link";
+import AuthLayout from "../../components/Layouts/auth";
 
 
 const KycGetStarted: NextPage = () => {
   return(
-      <DashboardLayout>
+      <AuthLayout wide={true}>
           <div className="nk-content nk-content-fluid">
               <div className="container-xl wide-lg">
                   <div className="nk-content-body">
@@ -33,8 +34,9 @@ const KycGetStarted: NextPage = () => {
                                                   your identity.</p>
                                           </div>
                                           <div className="nk-kyc-app-action">
-                                              <Link href="/kyc/application" className="btn btn-lg btn-primary">Click
-                                                  here to complete your KYC</Link>
+                                              <Link href="/kyc/application">
+                                                  <a className="btn btn-lg btn-primary">Click here to complete your KYC</a>
+                                              </Link>
                                           </div>
                                       </div>
                                   </div>
@@ -50,7 +52,7 @@ const KycGetStarted: NextPage = () => {
                   </div>
               </div>
           </div>
-      </DashboardLayout>
+      </AuthLayout>
   )
 }
 

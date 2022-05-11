@@ -1,9 +1,8 @@
-import DashboardLayout from "../../components/Layouts/dashboard";
-
+import AuthLayout from "../../components/Layouts/auth";
 
 const KycApplication = () => {
     return (
-        <DashboardLayout>
+        <AuthLayout wide={true}>
             <div className="nk-content nk-content-fluid">
                 <div className="container-xl wide-lg">
                     <div className="nk-content-body">
@@ -385,7 +384,7 @@ const KycApplication = () => {
                     </div>
                 </div>
             </div>
-        </DashboardLayout>
+        </AuthLayout>
     )
 }
 
