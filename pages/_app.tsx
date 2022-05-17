@@ -15,9 +15,9 @@ function MyApp({Component, pageProps}: AppProps) {
                 <link rel="shortcut icon" href="/images/favicon.png"/>
 
                 <title>Bride City Loan</title>
-                <link rel="stylesheet" href="/assets/css/dashlite.css?ver=3.0.2"/>
-                <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=3.0.2"/>
             </Head>
+            <link rel="stylesheet" href="/assets/css/dashlite.css?ver=3.0.2"/>
+            <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=3.0.2"/>
             <Component {...pageProps} />
             <ExternalScripts/>
         </>
