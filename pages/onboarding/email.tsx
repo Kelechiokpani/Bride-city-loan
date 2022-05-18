@@ -6,68 +6,65 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup'
 import { useState } from "react";
+import { codeVerificationValidatoion } from "../../validations";
+import { useMutation } from "@apollo/client";
+import { CODE_VERIFICATION } from "../../graphql/mutations";
 
 
 const EmailOnBoarding: NextPage = () => {
 
     const router: NextRouter = useRouter()
 
-    interface UserSubmitForm {
-        email: string;
+    const [verifyEmail, { loading }] = useMutation<{
+        type: string,
+        code: string,
+    }>(CODE_VERIFICATION)
 
+    interface UserSubmitForm {
+        code: string;
     };
 
-    const validationSchema = Yup.object().shape({
-        email: Yup.string()
-            .required('Email is required')
-            .email('Email is invalid'),
 
-    });
 
     const {
         register,
         handleSubmit,
-        getValues,
-        reset,
         formState: { errors }
     } = useForm<UserSubmitForm>({
-        resolver: yupResolver(validationSchema)
+        resolver: yupResolver(codeVerificationValidatoion)
     });
 
     const onSubmit = (data: UserSubmitForm) => {
-        // console.log(JSON.stringify(data, null, 2));
-
-        const values = getValues()
-        console.log('values', values)
-        console.log(JSON.stringify(data))
-
-
-        router.push('/onboarding/bvn');
+        verifyEmail({
+            variables: {
+                type: 'Email',
+                code: data.code,
+            }
+        }).then(({data}) => {
+            router.push('/onboarding/phone');
+        })
     };
 
     return (
         <AuthLayout wide={true}>
-            <OnBoardingWrapper currentStep={'kyc'}>
+            <OnBoardingWrapper currentStep={'email'}>
                 <div className={'col-lg-10'}>
                     <form action="" onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
-                            <div className="form-label-group">
-                                <label className="form-label"
-                                    htmlFor="default-01">Email Verification Code</label>
-                            </div>
                             <div className="form-control-wrap">
                                 <input type="text"
-                                    {...register('email')}
-                                    className={`form-control form-control-lg ${errors.email ? 'is-invalid' : ''}`}
-                                    id="email"
-                                    placeholder="email@example.com"
+                                    {...register('code')}
+                                    className={`form-control form-control-lg ${errors.code ? 'is-invalid' : ''}`}
+                                    id="code"
+                                    placeholder="Enter email verification code"
                                 />
-                                <div className="invalid-feedback">{errors.email?.message}</div>
+                                <div className="invalid-feedback">{errors.code?.message}</div>
                             </div>
                         </div>
                         <div className="form-group">
 
-                            <button className="btn btn-lg btn-primary btn-block">Verify Email
+                            <button className="btn btn-lg btn-primary btn-block" disabled={loading}>
+                                Verify Email
                             </button>
 
                         </div>

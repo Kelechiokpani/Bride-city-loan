@@ -4,74 +4,66 @@ import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
 import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+import { codeVerificationValidatoion } from "../../validations";
+import { useMutation } from "@apollo/client";
+import { CODE_VERIFICATION } from "../../graphql/mutations";
 
 
 
 interface UserSubmitForm {
-    phone: string;
+    code: string;
 
 }
 const PhoneOnBoarding: NextPage = () => {
     const router = useRouter()
+    const [verifyPhone, { loading }] = useMutation<{
+        type: string,
+        code: string,
+    }>(CODE_VERIFICATION)
 
-    const validationSchema = Yup.object().shape({
-
-        phone: Yup.number()
-            .typeError("That doesn't look like a phone number")
-            .positive("A phone number can't start with a minus")
-            .integer("A phone number can't include a decimal point")
-            .min(8)
-            //   .max(12)
-            .required('A phone number is required'),
-
-    })
     const {
-        register,
         handleSubmit,
-        getValues,
-        reset,
+        register,
         formState: { errors },
     } = useForm<UserSubmitForm>({
-        resolver: yupResolver(validationSchema)
+        resolver: yupResolver(codeVerificationValidatoion)
     });
 
     const onSubmit = (data: UserSubmitForm) => {
-        // console.log(JSON.stringify(data, null, 2));
-
-        const values = getValues()
-        console.log('values', values)
-        console.log(JSON.stringify(data))
-
-
-        router.push("/onboarding/email");
+         verifyPhone({
+            variables: {
+                type: 'Phone',
+                code: data.code,
+            }
+        }).then(({data}) => {
+            router.push('/onboarding/phone');
+        })
 
     };
 
     return (
         <AuthLayout wide={true}>
-            <OnBoardingWrapper currentStep={'kyc'}>
+            <OnBoardingWrapper currentStep={'phone'}>
                 <div className={'col-lg-10'}>
                     <form action="" onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
                             <div className="form-label-group">
-                                <label className="form-label"
-                                    htmlFor="default-01">Phone Number Verification </label>
                             </div>
                             <div className="form-control-wrap">
                                 <input type="text"
-                                    {...register('phone')}
-                                    className={`form-control form-control-lg ${errors.phone ? 'is-invalid' : ''}`}
-                                    id="phone"
-                                    placeholder="Enter a avlid phone number "
+                                    {...register('code')}
+                                    className={`form-control form-control-lg ${errors.code ? 'is-invalid' : ''}`}
+                                    id="code"
+                                    placeholder="Enter phone verification code"
                                 />
-                                <div className="invalid-feedback">{errors.phone?.message}</div>
+                                <div className="invalid-feedback">{errors.code?.message}</div>
 
                             </div>
                         </div>
                         <div className="form-group">
 
-                            <button className="btn btn-lg btn-primary btn-block">Verify Phone Number
+                            <button className="btn btn-lg btn-primary btn-block" disabled={loading}>
+                                Verify Phone Number
                             </button>
 
                         </div>

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { NextPage } from "next";
 import AuthLayout from "../../components/Layouts/auth";
 import Link from "next/link";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-// import { useState } from "react";
+import { loginValidation } from "../../validations";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../../graphql/mutations";
+import Router from "next/router";
 
 
 interface UserSubmitForm {
@@ -15,43 +17,31 @@ interface UserSubmitForm {
 }
 
 const RegisterPage: NextPage = () => {
-    const [values, setValues] = useState({
-        email: "",
-        password: ""
-    })
 
-
-    const validationSchema = Yup.object().shape({
-        email: Yup.string()
-            .required('Email is required')
-            .email('Email is invalid'),
-
-
-        password: Yup.string()
-            .required('Password is required')
-            .min(6, 'Password must be at least 6 characters')
-            .max(12, 'Password must not exceed 12 characters'),
-
-    });
-
+    const [loginUser, { loading }] = useMutation<{
+        email: string,
+        password: string
+    }>(LOGIN_USER)
     const {
         register,
         handleSubmit,
-        getValues,
-        reset,
         formState: { errors },
     } = useForm<UserSubmitForm>({
-        resolver: yupResolver(validationSchema)
+        resolver: yupResolver(loginValidation)
     });
 
     const onSubmit = (data: UserSubmitForm) => {
-        // console.log(JSON.stringify(data, null, 2));
 
-        const values = getValues()
-        console.log('values', values)
-        console.log(JSON.stringify(data))
+        loginUser({
+            variables: {
+                email: data.email,
+                password: data.password,
+            }
+        }).then(({ data }) => {
+            // use toast notification
 
-        window.location.href = "/onboarding/phone";
+            Router.push('/onboarding/email')
+        })
     };
 
 
@@ -109,7 +99,7 @@ const RegisterPage: NextPage = () => {
                             </div>
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-lg btn-primary btn-block">Login</button>
+                            <button className="btn btn-lg btn-primary btn-block" disabled={loading}>Login</button>
                         </div>
                     </form>
                     <div className="form-note-s2 text-center pt-4"> Already have an account?

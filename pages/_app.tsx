@@ -2,8 +2,12 @@ import '../styles/globals.css'
 import type {AppProps} from 'next/app'
 import Head from "next/head";
 import ExternalScripts from "../components/scripts";
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from '../utils/apollo';
 
 function MyApp({Component, pageProps}: AppProps) {
+    const apolloClient = useApollo(pageProps);
+
     return (
         <>
             <Head>
@@ -18,7 +22,9 @@ function MyApp({Component, pageProps}: AppProps) {
             </Head>
             <link rel="stylesheet" href="/assets/css/dashlite.css?ver=3.0.2"/>
             <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=3.0.2"/>
-            <Component {...pageProps} />
+            <ApolloProvider client={apolloClient}>
+                <Component {...pageProps} />
+            </ApolloProvider>
             <ExternalScripts/>
         </>
     )
