@@ -1,7 +1,7 @@
 import { NextPage } from "next";
+import { NextRouter, useRouter } from "next/router";
 import AuthLayout from "../../components/Layouts/auth";
 import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
-import Link from "next/link";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup'
@@ -9,6 +9,8 @@ import { useState } from "react";
 
 
 const EmailOnBoarding: NextPage = () => {
+
+    const router: NextRouter = useRouter()
 
     interface UserSubmitForm {
         email: string;
@@ -21,7 +23,7 @@ const EmailOnBoarding: NextPage = () => {
             .email('Email is invalid'),
 
     });
-    
+
     const {
         register,
         handleSubmit,
@@ -40,7 +42,7 @@ const EmailOnBoarding: NextPage = () => {
         console.log(JSON.stringify(data))
 
 
-        window.location.href = "/onboarding/bvn";
+        router.push('/onboarding/bvn');
     };
 
     return (

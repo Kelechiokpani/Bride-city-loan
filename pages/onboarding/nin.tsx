@@ -1,7 +1,7 @@
 import { NextPage } from "next";
+import { NextRouter, useRouter } from "next/router";
 import AuthLayout from "../../components/Layouts/auth";
 import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
-import Link from "next/link";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -13,6 +13,7 @@ interface UserSubmitForm {
 
 }
 const NinOnBoarding: NextPage = () => {
+    const router: NextRouter = useRouter()
 
     const validationSchema = Yup.object().shape({
 
@@ -43,7 +44,7 @@ const NinOnBoarding: NextPage = () => {
         console.log(JSON.stringify(data))
 
 
-        window.location.href = "/onboarding/kyc";
+        router.push('/onboarding/kyc');
 
     };
 

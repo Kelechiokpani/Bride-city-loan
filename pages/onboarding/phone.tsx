@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import AuthLayout from "../../components/Layouts/auth";
 import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
@@ -13,6 +13,7 @@ interface UserSubmitForm {
 
 }
 const PhoneOnBoarding: NextPage = () => {
+    const router = useRouter()
 
     const validationSchema = Yup.object().shape({
 
@@ -43,7 +44,7 @@ const PhoneOnBoarding: NextPage = () => {
         console.log(JSON.stringify(data))
 
 
-        window.location.href = "/onboarding/email";
+        router.push("/onboarding/email");
 
     };
 
