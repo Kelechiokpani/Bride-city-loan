@@ -1,4 +1,4 @@
-import {NextPage} from "next";
+import { NextPage } from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import Switcher from "../../components/Account/switcher";
 
@@ -16,13 +16,13 @@ const AccountProfile: NextPage = () => {
                                 <div className="nk-block-des">
                                     <p>You have full control to manage your own account setting. <span
                                         className="text-primary"><em className="icon ni ni-info"
-                                                                     data-bs-toggle="tooltip" data-bs-placement="right"
-                                                                     title="Tooltip on right"></em></span></p>
+                                            data-bs-toggle="tooltip" data-bs-placement="right"
+                                            title="Tooltip on right"></em></span></p>
                                 </div>
                             </div>
                         </div>
 
-                        <Switcher activeTab={'Personal'}/>
+                        <Switcher activeTab={'Personal'} />
 
                         <div className="nk-block">
                             <div className="alert alert-warning">
@@ -101,10 +101,10 @@ const AccountProfile: NextPage = () => {
                                 </div>
 
                                 <div className="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit"
-                                     data-tab-target="#address">
+                                    data-tab-target="#address">
                                     <div className="data-col">
                                         <span className="data-label">Address</span>
-                                        <span className="data-value">2337 Kildeer Drive,<br/>Kentucky, Canada</span>
+                                        <span className="data-value">2337 Kildeer Drive,<br />Kentucky, Canada</span>
                                     </div>
                                     <div className="data-col data-col-end"><span className="data-more"><em
                                         className="icon ni ni-forward-ios"></em></span></div>
@@ -122,8 +122,8 @@ const AccountProfile: NextPage = () => {
                                         <span className="data-value">English (United State)</span>
                                     </div>
                                     <div className="data-col data-col-end"><a data-bs-toggle="modal"
-                                                                              href="#profile-edit"
-                                                                              className="link link-primary">Change
+                                        href="#profile-edit"
+                                        className="link link-primary">Change
                                         Language</a></div>
                                 </div>
 
@@ -133,8 +133,8 @@ const AccountProfile: NextPage = () => {
                                         <span className="data-value">M d, YYYY</span>
                                     </div>
                                     <div className="data-col data-col-end"><a data-bs-toggle="modal"
-                                                                              href="#profile-edit"
-                                                                              className="link link-primary">Change</a>
+                                        href="#profile-edit"
+                                        className="link link-primary">Change</a>
                                     </div>
                                 </div>
 
@@ -144,8 +144,8 @@ const AccountProfile: NextPage = () => {
                                         <span className="data-value">Bangladesh (GMT +6)</span>
                                     </div>
                                     <div className="data-col data-col-end"><a data-bs-toggle="modal"
-                                                                              href="#profile-edit"
-                                                                              className="link link-primary">Change</a>
+                                        href="#profile-edit"
+                                        className="link link-primary">Change</a>
                                     </div>
                                 </div>
 
