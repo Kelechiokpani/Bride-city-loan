@@ -13,35 +13,35 @@ type Stepper = {
 }
 
 const OnBoardingWrapper: FC<Props> = ({ children, currentStep, previousStep }: Props) => {
+
+
     let steps: Stepper[] = [
         {
             name: 'email',
-            text: 'Verify phone Number'
-        }, {
-            name: 'kyc',
             text: 'Verify Email Address'
-        },
-        {
-            name: 'Bank Verification Number',
-            text: 'Verify your Bvn'
         }, {
-            name: 'National Identification Number',
-            text: 'Verify Nin'
+            name: 'phone',
+            text: 'Verify Phone Number'
         },
         {
-            name: 'Valid Document',
+            name: 'bvn',
+            text: 'Verify your Bvn'
+        },
+        {
+            name: 'document',
             text: 'Upload A Valid Document'
         },
     ];
+
     return (
         <div className="nk-content nk-content-fluid">
             <div className="container-xl wide-lg">
                 <div className="nk-content-body">
                     <div className="nk-block-head nk-block-head-lg wide-xs mx-auto">
                         <div className="nk-block-head-content text-center">
-                            <h2 className="nk-block-title fw-normal">Nice, Abu Bin Ishtiyak!</h2>
+                            <h2 className="nk-block-title fw-normal">Welcome, user.name!</h2>
                             <div className="nk-block-des">
-                                <p>Welcome to <strong>Bride City Loan Dashboard</strong>. You are few steps away to complete your profile.</p>
+                               <strong>You are few steps away to complete your profile.</strong>
                             </div>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ const OnBoardingWrapper: FC<Props> = ({ children, currentStep, previousStep }: P
                                             <ul className="list list-step">
                                                 {
                                                     steps.map((step, index) => (
-                                                        <li className={step.name === currentStep ? 'list-step-current' : 'list-step-done'} key={index}>{step.text}</li>
+                                                        <li className={step.name === currentStep ? 'list-step-current' : ''} key={index}>{step.text}</li>
                                                     ))
                                                 }
 
@@ -75,7 +75,7 @@ const OnBoardingWrapper: FC<Props> = ({ children, currentStep, previousStep }: P
                                                 </div>
                                                 <div className="flex-item">
                                                     <span
-                                                        className="sub-text sub-text-sm text-soft">1/3 Completed</span>
+                                                        className="sub-text sub-text-sm text-soft">1/{steps.length} Completed</span>
                                                 </div>
                                             </div>
                                         </div>

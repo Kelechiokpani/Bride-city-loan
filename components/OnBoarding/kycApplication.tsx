@@ -4,13 +4,23 @@ import Image from "next/image";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { UPLOAD_BILL } from "../../graphql/mutations";
+import { useMutation } from "@apollo/client";
+import { NextRouter, useRouter } from "next/router";
 
 
 interface UserSubmitForm {
     acceptTerms: boolean;
+    image: string| undefined;
 }
 
 const KycApplication: FC = () => {
+    const router: NextRouter = useRouter()
+
+    const [uploadBill, { loading }] = useMutation<{
+        image: string,
+    }>(UPLOAD_BILL)
+
 
     const validationSchema = Yup.object().shape({
         acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required')
@@ -18,25 +28,35 @@ const KycApplication: FC = () => {
     });
 
     const {
-        register,
         handleSubmit,
+        setValue,
         getValues,
-        reset,
         formState: { errors }
     } = useForm<UserSubmitForm>({
         resolver: yupResolver(validationSchema)
     });
 
     const onSubmit = (data: UserSubmitForm) => {
-        // console.log(JSON.stringify(data, null, 2));
-
-        const values = getValues()
-        console.log('values', values)
-        console.log(JSON.stringify(data))
-
-
-        window.location.href = "/account/profile";
+        uploadBill({
+            variables: {
+                image: data.image
+            }
+        }).then(({data}) => {
+            router.push('/account/profile');
+        })
     };
+
+    const processImage = ({ target }: { target: any }) => {
+        let file = target.files[0];
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            setValue('image', reader.result?.toString())
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        };
+    }
 
 
     return (
@@ -56,18 +76,12 @@ const KycApplication: FC = () => {
                     <form className="nk-block" onSubmit={handleSubmit(onSubmit)}>
                         <div className="card card-bordered">
                             <div className="nk-kycfm">
-
-
-
-
                                 <div className="nk-kycfm-content">
                                     <div className="nk-kycfm-note">
                                         <em className="icon ni ni-info-fill" data-bs-toggle="tooltip"
                                             data-bs-placement="right" title="Tooltip on right"></em>
                                         <p>In order to complete, please upload any of the following personal
                                             document.</p>
-
-
 
                                     </div>
                                     <ul className="nk-kycfm-control-list g-3">
@@ -112,7 +126,7 @@ const KycApplication: FC = () => {
                                                                 className="dz-message-text"> Drag and drop file  </span>
                                                             <span className="dz-message-or"> or  </span>
 
-                                                            <input className="btn  " type="file" id="SELECT" name="filename" />
+                                                            <input className="btn  " type="file" id="SELECT" name="filename" onChange={processImage} />
 
                                                         </div>
                                                     </div>
@@ -156,7 +170,7 @@ const KycApplication: FC = () => {
                                     </div>
                                     <div className="nk-kycfm-action pt-2">
 
-                                        <button type="submit" className="btn btn-lg btn-primary">Process for
+                                        <button type="submit" className="btn btn-lg btn-primary" disabled={loading}>Process for
                                             Verify
                                         </button>
 

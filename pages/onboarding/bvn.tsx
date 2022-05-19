@@ -5,51 +5,47 @@ import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import { useMutation } from "@apollo/client";
+import { IDENTITY_VERIFICATION } from "../../graphql/mutations";
+import { identityVerificationValidation } from "../../validations";
 
 
 
 interface UserSubmitForm {
-    phone: string;
+    number: string;
 
 }
 const BvnOnBoarding: NextPage = () => {
     const router: NextRouter = useRouter()
+    const [verifyBvn, { loading }] = useMutation<{
+        type: string,
+        code: string,
+    }>(IDENTITY_VERIFICATION)
 
-    const validationSchema = Yup.object().shape({
 
-        phone: Yup.number()
-            .typeError("That doesn't look like a Valid BVN number")
-            .positive("A valid Bvn can't start with a minus")
-            .integer("A valid Bvn can't include a decimal point")
-            .min(10)
-            //   .max(12)
-            .required('A valid bank verification number is required'),
-
-    })
     const {
         register,
         handleSubmit,
-        getValues,
-        reset,
         formState: { errors },
     } = useForm<UserSubmitForm>({
-        resolver: yupResolver(validationSchema)
+        resolver: yupResolver(identityVerificationValidation)
     });
 
     const onSubmit = (data: UserSubmitForm) => {
-        // console.log(JSON.stringify(data, null, 2));
-
-        const values = getValues()
-        console.log('values', values)
-        console.log(JSON.stringify(data))
-
-        router.push('/onboarding/nin');
+       verifyBvn({
+            variables: {
+                type: 'BVN',
+                code: data.number,
+            }
+        }).then(({data}) => {
+            router.push('/onboarding/kyc');
+        })
 
     };
 
     return (
         <AuthLayout wide={true}>
-            <OnBoardingWrapper currentStep={'kyc'}>
+            <OnBoardingWrapper currentStep={'bvn'}>
                 <div className={'col-lg-10'}>
                     <form action="" onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
@@ -59,12 +55,12 @@ const BvnOnBoarding: NextPage = () => {
                             </div>
                             <div className="form-control-wrap">
                                 <input type="text"
-                                    {...register('phone')}
-                                    className={`form-control form-control-lg ${errors.phone ? 'is-invalid' : ''}`}
-                                    id="phone"
+                                    {...register('number')}
+                                    className={`form-control form-control-lg ${errors.number ? 'is-invalid' : ''}`}
+                                    id="number"
                                     placeholder="Enter a Valid Bvn "
                                 />
-                                <div className="invalid-feedback">{errors.phone?.message}</div>
+                                <div className="invalid-feedback">{errors.number?.message}</div>
 
                             </div>
                         </div>
