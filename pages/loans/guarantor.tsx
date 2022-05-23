@@ -1,10 +1,13 @@
 import { NextPage } from "next";
+import React, { useState } from 'react';
 import { NextRouter, useRouter } from "next/router";
 import Link from "next/link";
 import DashboardLayout from "../../components/Layouts/dashboard";
 
 
-const LoanApplication: NextPage = () => {
+
+const GuarantorForm: NextPage = () => {
+
     const router: NextRouter = useRouter()
 
     return (
@@ -15,7 +18,7 @@ const LoanApplication: NextPage = () => {
                         <div className="kyc-app wide-sm m-auto">
                             <div className="nk-block-head nk-block-head-lg wide-xs mx-auto">
                                 <div className="nk-block-head-content text-center">
-                                    <h2 className="nk-block-title fw-normal">Loan Application</h2>
+                                    <h2 className="nk-block-title fw-normal">Loan Application </h2>
                                     <div className="nk-block-des">
                                         <p>Complete the informationBelow for verification</p>
                                     </div>
@@ -28,9 +31,9 @@ const LoanApplication: NextPage = () => {
                                     <div className="card card-bordered">
                                         <div className="nk-kycfm">
                                             <div className="nk-kycfm-head">
-                                                <div className="nk-kycfm-count">01</div>
+                                                <div className="nk-kycfm-count">03</div>
                                                 <div className="nk-kycfm-title">
-                                                    <h5 className="title">Personal Details</h5>
+                                                    <h5 className="title">Guarantors Details </h5>
                                                     <p className="sub-title">Your simple personal information required for
                                                         identification</p>
                                                 </div>
@@ -99,7 +102,7 @@ const LoanApplication: NextPage = () => {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <div className="form-label-group">
-                                                                <label className="form-label">Date of Birth <span
+                                                                <label className="form-label">Relationship With Guarantor  <span
                                                                     className="text-danger">*</span></label>
                                                             </div>
                                                             <div className="form-control-group">
@@ -112,7 +115,7 @@ const LoanApplication: NextPage = () => {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <div className="form-label-group">
-                                                                <label className="form-label">L G A<span
+                                                                <label className="form-label">Occupation <span
                                                                     className="text-danger">*</span></label>
                                                             </div>
                                                             <div className="form-control-group">
@@ -127,9 +130,9 @@ const LoanApplication: NextPage = () => {
                                             </div>
 
                                             <div className="nk-kycfm-head">
-                                                <div className="nk-kycfm-count">02</div>
+                                                <div className="nk-kycfm-count">04</div>
                                                 <div className="nk-kycfm-title">
-                                                    <h5 className="title">Your Address</h5>
+                                                    <h5 className="title">Guarantors Address</h5>
                                                     <p className="sub-title">Your simple personal information required for
                                                         identification</p>
                                                 </div>
@@ -145,7 +148,7 @@ const LoanApplication: NextPage = () => {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <div className="form-label-group">
-                                                                <label className="form-label">Address Line 1 <span
+                                                                <label className="form-label">Contact Address 1 <span
                                                                     className="text-danger">*</span></label>
                                                             </div>
                                                             <div className="form-control-group">
@@ -158,7 +161,7 @@ const LoanApplication: NextPage = () => {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <div className="form-label-group">
-                                                                <label className="form-label">Address Line 2</label>
+                                                                <label className="form-label">Home Address 2</label>
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
@@ -209,12 +212,14 @@ const LoanApplication: NextPage = () => {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <div className="form-label-group">
-                                                                <label className="form-label">Zip Code <span
+                                                                <label className="form-label">Date <span
                                                                     className="text-danger">*</span></label>
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
                                                                     className="form-control form-control-lg" />
+
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -225,7 +230,7 @@ const LoanApplication: NextPage = () => {
 
                                             </div>
                                             <button className="btn btn-lg   ">
-                                                <Link href='/loans/guarantor'>
+                                                <Link href='/loans/category'>
                                                     Next
                                                 </Link>
                                             </button>
@@ -246,4 +251,4 @@ const LoanApplication: NextPage = () => {
     )
 }
 
-export default LoanApplication
+export default GuarantorForm

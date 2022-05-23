@@ -1,7 +1,11 @@
-import type {NextPage} from 'next'
+import type { NextPage } from 'next'
+// import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
 import TransactionsList from "../components/TransactionsList";
 const Home: NextPage = () => {
+    const router: NextRouter = useRouter()
     return (
         <DashboardLayout>
             <div className="nk-content nk-content-fluid">
@@ -20,14 +24,18 @@ const Home: NextPage = () => {
 
                                 <div className="nk-block-head-content">
                                     <ul className="nk-block-tools gx-3">
-                                        <li><a href="#" className="btn btn-primary"><span>Apply</span> <em
-                                            className="icon ni ni-arrow-long-right"></em></a></li>
+                                        <Link href='/loans/apply'>
+                                            <a className="btn btn-primary">
+                                                <span>Apply</span>
+                                                <em className="icon ni ni-arrow-long-right"></em>
+                                            </a>
+                                        </Link>
                                         <li><a href="#" className="btn btn-white btn-light"><span>Withdraw</span> <em
                                             className="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a>
                                         </li>
                                         <li className="opt-menu-md dropdown">
                                             <a href="#" className="btn btn-white btn-light btn-icon"
-                                               data-bs-toggle="dropdown"><em className="icon ni ni-setting"></em></a>
+                                                data-bs-toggle="dropdown"><em className="icon ni ni-setting"></em></a>
                                             <div className="dropdown-menu dropdown-menu-end">
                                                 <ul className="link-list-opt no-bdr">
                                                     <li><a href="#"><em className="icon ni ni-coin-alt"></em><span>Curreny Settings</span></a>
@@ -129,7 +137,7 @@ const Home: NextPage = () => {
                                                             </div>
                                                             <div className="invest-data-ck">
                                                                 <canvas className="iv-data-chart"
-                                                                        id="totalDeposit"></canvas>
+                                                                    id="totalDeposit"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -151,9 +159,9 @@ const Home: NextPage = () => {
                                                             </div>
                                                         </div>
                                                         <div className="card-amount">
-                                                        <span className="amount">
-                                                            6,000
-                                                        </span>
+                                                            <span className="amount">
+                                                                6,000
+                                                            </span>
                                                         </div>
                                                         <div className="invest-data">
                                                             <div className="invest-data-amount g-2">
@@ -172,7 +180,7 @@ const Home: NextPage = () => {
                                                             </div>
                                                             <div className="invest-data-ck">
                                                                 <canvas className="iv-data-chart"
-                                                                        id="totalWithdraw"></canvas>
+                                                                    id="totalWithdraw"></canvas>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -188,7 +196,7 @@ const Home: NextPage = () => {
 
                         </div>
                         {/* Transactions Here */}
-                        <TransactionsList/>
+                        <TransactionsList />
                         <div className="nk-block">
                             <div className="card card-bordered">
                                 <div className="nk-refwg">
@@ -206,15 +214,15 @@ const Home: NextPage = () => {
                                         <div className="nk-refwg-url">
                                             <div className="form-control-wrap">
                                                 <div className="form-clip clipboard-init"
-                                                     data-clipboard-target="#refUrl"
-                                                     data-success="Copied" data-text="Copy Link"><em
-                                                    className="clipboard-icon icon ni ni-copy"></em> <span
-                                                    className="clipboard-text">Copy Link</span></div>
+                                                    data-clipboard-target="#refUrl"
+                                                    data-success="Copied" data-text="Copy Link"><em
+                                                        className="clipboard-icon icon ni ni-copy"></em> <span
+                                                            className="clipboard-text">Copy Link</span></div>
                                                 <div className="form-icon">
                                                     <em className="icon ni ni-link-alt"></em>
                                                 </div>
                                                 <input type="text" className="form-control copy-text" id="refUrl"
-                                                       value="https://dashlite.net/?ref=4945KD48"/>
+                                                    value="https://dashlite.net/?ref=4945KD48" />
                                             </div>
                                         </div>
                                     </div>
@@ -223,9 +231,9 @@ const Home: NextPage = () => {
                                         <div className="nk-refwg-group g-3">
                                             <div className="nk-refwg-name">
                                                 <h6 className="title">My Referral <em className="icon ni ni-info"
-                                                                                      data-bs-toggle="tooltip"
-                                                                                      data-bs-placement="right"
-                                                                                      title="Referral Informations"></em>
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-placement="right"
+                                                    title="Referral Informations"></em>
                                                 </h6>
                                             </div>
                                             <div className="nk-refwg-info g-3">
@@ -240,7 +248,7 @@ const Home: NextPage = () => {
                                             </div>
                                             <div className="nk-refwg-more dropdown mt-n1 me-n1">
                                                 <a href="#" className="btn btn-icon btn-trigger"
-                                                   data-bs-toggle="dropdown"><em className="icon ni ni-more-h"></em></a>
+                                                    data-bs-toggle="dropdown"><em className="icon ni ni-more-h"></em></a>
                                                 <div className="dropdown-menu dropdown-menu-xs dropdown-menu-end">
                                                     <ul className="link-list-plain sm">
                                                         <li><a href="#">7 days</a></li>
