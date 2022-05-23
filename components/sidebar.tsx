@@ -171,7 +171,7 @@ const Sidebar: FC = () => {
                                     </Link>
                                 </li>
                                 <li className="nk-menu-item">
-                                    <Link href="/transactions/transaction">
+                                    <Link href="/transactions/index">
                                         <a href="" className="nk-menu-link">
                                             <span className="nk-menu-icon"><em
                                                 className="icon ni ni-wallet-alt"></em></span>
