@@ -8,17 +8,16 @@ import {
 import { onError } from '@apollo/client/link/error'
 import { useMemo } from 'react';
 import { NextApiRequest, NextApiResponse } from 'next';
-
+import {NEXT_PUBLIC_GQL_URL} from "./config";
 export interface GraphQlContext {
     req: NextApiRequest;
     res: NextApiResponse;
-};
+}
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
-
 const httpLink: ApolloLink = createHttpLink({
-    uri: 'http://localhost:9000',
+    uri: NEXT_PUBLIC_GQL_URL,
     credentials: 'include',
 })
 
