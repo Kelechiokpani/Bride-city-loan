@@ -52,3 +52,4 @@ export const identityVerificationValidation = Yup.object().shape({
         .required('A valid bank verification number is required'),
 
 })
+
