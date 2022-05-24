@@ -4,8 +4,16 @@ import Link from 'next/link';
 import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
 import TransactionsList from "../components/TransactionsList";
+
+
+
 const Home: NextPage = () => {
     const router: NextRouter = useRouter()
+
+    const handleClick = () => {
+        console.log('navigate to loan apply page')
+        router.push('/loans/apply')
+    }
     return (
         <DashboardLayout>
             <div className="nk-content nk-content-fluid">
@@ -24,12 +32,12 @@ const Home: NextPage = () => {
 
                                 <div className="nk-block-head-content">
                                     <ul className="nk-block-tools gx-3">
-                                        <Link href='/loans/apply'>
+                                        <li onClick={handleClick}>
                                             <a className="btn btn-primary">
                                                 <span>Apply</span>
                                                 <em className="icon ni ni-arrow-long-right"></em>
                                             </a>
-                                        </Link>
+                                        </li>
                                         <li><a href="#" className="btn btn-white btn-light"><span>Withdraw</span> <em
                                             className="icon ni ni-arrow-long-right d-none d-sm-inline-block"></em></a>
                                         </li>
