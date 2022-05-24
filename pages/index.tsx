@@ -222,7 +222,7 @@ const Home: NextPage = () => {
                                                     <em className="icon ni ni-link-alt"></em>
                                                 </div>
                                                 <input type="text" className="form-control copy-text" id="refUrl"
-                                                    value="https://dashlite.net/?ref=4945KD48" />
+                                                   />
                                             </div>
                                         </div>
                                     </div>
