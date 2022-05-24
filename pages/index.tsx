@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-// import { Link } from 'react-router-dom';
 import Link from 'next/link';
 import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
