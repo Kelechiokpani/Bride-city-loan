@@ -1,0 +1,15 @@
+{
+  "name": "Bride City Lone",
+  "schemaPath": "brideCityLone.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:8000/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}
