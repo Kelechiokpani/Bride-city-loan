@@ -1,6 +1,7 @@
 import {NextPage} from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import Switcher from "../../components/Account/switcher";
+import withKycEnabled from "../../utils/kycChecker";
 
 
 const Security: NextPage = () => {
@@ -172,5 +173,12 @@ const Security: NextPage = () => {
       </DashboardLayout>
   )
 }
+
+
+export const getServerSideProps = withKycEnabled((ctx: any) => {
+    return {
+        props: {}
+    };
+});
 
 export default Security

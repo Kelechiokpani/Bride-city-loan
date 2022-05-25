@@ -6,6 +6,7 @@ import Link from "next/link";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import Select from 'react-select'
 import AsyncSelect from 'react-select/async';
+import withKycEnabled from "../../utils/kycChecker";
 
 
 const LoanCategory: NextPage = () => {
@@ -157,5 +158,11 @@ const LoanCategory: NextPage = () => {
         </DashboardLayout>
     )
 }
+
+export const getServerSideProps = withKycEnabled((ctx: any) => {
+    return {
+        props: {}
+    };
+});
 
 export default LoanCategory
