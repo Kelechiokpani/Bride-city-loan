@@ -1,10 +1,11 @@
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import Link from 'next/link';
 import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
 import TransactionsList from "../components/TransactionsList";
+import withAuthenticator from "../utils/authenticator";
+import withKycEnabled from '../utils/kycChecker';
 const Home: NextPage = () => {
-    const router: NextRouter = useRouter()
     return (
         <DashboardLayout>
             <div className="nk-content nk-content-fluid">
@@ -276,4 +277,10 @@ const Home: NextPage = () => {
     )
 }
 
-export default Home
+export const getServerSideProps = withKycEnabled((ctx: any) => {
+    return {
+        props: {}
+    };
+});
+
+export default Home;

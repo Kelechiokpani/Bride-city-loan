@@ -5,9 +5,10 @@ import Link from "next/link";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidation } from "../../validations";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { LOGIN_USER } from "../../graphql/mutations";
 import Router from "next/router";
+import { GET_CURRENT_USER } from "../../graphql/queries";
 
 
 interface UserSubmitForm {
@@ -16,7 +17,7 @@ interface UserSubmitForm {
 
 }
 
-const RegisterPage: NextPage = () => {
+const LoginPage: NextPage = () => {
 
     const [loginUser, { loading }] = useMutation<{
         email: string,
@@ -30,18 +31,21 @@ const RegisterPage: NextPage = () => {
         resolver: yupResolver(loginValidation)
     });
 
-    const onSubmit = (data: UserSubmitForm) => {
+    const onSubmit = async (data: UserSubmitForm) => {
 
-        loginUser({
+       await loginUser({
             variables: {
                 email: data.email,
                 password: data.password,
-            }
-        }).then(({ data }) => {
-            // use toast notification
-
-            Router.push('/onboarding/email')
-        })
+            },
+            refetchQueries: [
+                {
+                    query: GET_CURRENT_USER
+                }   
+            ]
+        }).then(({data}) => {
+            console.log(data);
+        });
     };
 
 
@@ -120,4 +124,4 @@ const RegisterPage: NextPage = () => {
     )
 }
 
-export default RegisterPage
+export default LoginPage

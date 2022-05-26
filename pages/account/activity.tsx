@@ -1,6 +1,7 @@
 import {NextPage} from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import {useRouter} from "next/router";
+import withKycEnabled from "../../utils/kycChecker";
 
 
 const Activity: NextPage = () => {
@@ -125,5 +126,11 @@ const Activity: NextPage = () => {
         </DashboardLayout>
     )
 }
+
+export const getServerSideProps = withKycEnabled((ctx: any) => {
+    return {
+        props: {}
+    };
+});
 
 export default Activity
