@@ -7,18 +7,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup'
 import { useState } from "react";
 import { codeVerificationValidatoion } from "../../validations";
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { CODE_VERIFICATION } from "../../graphql/mutations";
+import { GET_CURRENT_USER } from "../../graphql/queries";
+import { setCookies } from "cookies-next";
 
 
 const EmailOnBoarding: NextPage = () => {
 
     const router: NextRouter = useRouter()
 
-    const [verifyEmail, { loading }] = useMutation<{
-        type: string,
-        code: string,
-    }>(CODE_VERIFICATION)
+    const [verifyEmail, { loading }] = useMutation(CODE_VERIFICATION)
+    const [getCurrentUser] = useLazyQuery(GET_CURRENT_USER);
 
     interface UserSubmitForm {
         code: string;
@@ -40,8 +40,16 @@ const EmailOnBoarding: NextPage = () => {
                 type: 'Email',
                 code: data.code,
             }
-        }).then(({data}) => {
-            router.push('/onboarding/phone');
+        }).then(({data: {codeVerification}}) => {
+            if(codeVerification === 'success') {
+
+                // get current user
+                getCurrentUser().then(({data: {getCurrentUser}}) =>  {
+                    setCookies('x-user', getCurrentUser);
+
+                }) .finally(() => router.push('/'));
+            }
+
         })
     };
 

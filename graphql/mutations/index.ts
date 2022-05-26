@@ -21,7 +21,7 @@ mutation Verification($type: String! $code: String!) {
 
 
 export const IDENTITY_VERIFICATION = gql`
-mutation IdentityVerification($type: String! $number: String!) {
+mutation IdentityVerification($type: String! $number: Int!) {
     userIdentityVerification(type: $type number: $number)
 }
 `;

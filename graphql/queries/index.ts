@@ -6,6 +6,12 @@ getCurrentUser {
     _id
     email
     phone
+    firstName
+    lastName
+    emailVerified
+    phoneVerified
+    bvnVerified
+    utilityBill
 }
 }
 `;

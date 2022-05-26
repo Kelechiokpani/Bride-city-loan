@@ -5,8 +5,10 @@ import { useRouter } from "next/router";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { codeVerificationValidatoion } from "../../validations";
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { CODE_VERIFICATION } from "../../graphql/mutations";
+import { GET_CURRENT_USER } from "../../graphql/queries";
+import { setCookies } from "cookies-next";
 
 
 
@@ -16,10 +18,8 @@ interface UserSubmitForm {
 }
 const PhoneOnBoarding: NextPage = () => {
     const router = useRouter()
-    const [verifyPhone, { loading }] = useMutation<{
-        type: string,
-        code: string,
-    }>(CODE_VERIFICATION)
+    const [verifyPhone, { loading }] = useMutation(CODE_VERIFICATION)
+     const [getCurrentUser] = useLazyQuery(GET_CURRENT_USER);
 
     const {
         handleSubmit,
@@ -35,8 +35,15 @@ const PhoneOnBoarding: NextPage = () => {
                 type: 'Phone',
                 code: data.code,
             }
-        }).then(({data}) => {
-            router.push('/onboarding/phone');
+        }).then(({data: {codeVerification}}) => {
+            if(codeVerification === 'success') {
+
+                // get current user
+                getCurrentUser().then(({data: {getCurrentUser}}) =>  {
+                    setCookies('x-user', getCurrentUser);
+
+                }) .finally(() => router.push('/'));
+            }
         })
 
     };
