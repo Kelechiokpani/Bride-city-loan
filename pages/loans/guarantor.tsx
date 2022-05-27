@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { NextRouter, useRouter } from "next/router";
 import Link from "next/link";
 import DashboardLayout from "../../components/Layouts/dashboard";
+import withKycEnabled from "../../utils/kycChecker";
 
 
 
@@ -250,5 +251,11 @@ const GuarantorForm: NextPage = () => {
         </DashboardLayout>
     )
 }
+
+export const getServerSideProps = withKycEnabled((ctx: any) => {
+    return {
+        props: {}
+    };
+});
 
 export default GuarantorForm

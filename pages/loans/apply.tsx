@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { NextRouter, useRouter } from "next/router";
 import Link from "next/link";
 import DashboardLayout from "../../components/Layouts/dashboard";
+import withKycEnabled from "../../utils/kycChecker";
 
 
 const LoanApplication: NextPage = () => {
@@ -245,5 +246,11 @@ const LoanApplication: NextPage = () => {
         </DashboardLayout>
     )
 }
+
+export const getServerSideProps = withKycEnabled((ctx: any) => {
+    return {
+        props: {}
+    };
+});
 
 export default LoanApplication

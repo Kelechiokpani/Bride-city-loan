@@ -5,10 +5,14 @@ import Link from "next/link";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidation } from "../../validations";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { LOGIN_USER } from "../../graphql/mutations";
 import Router from "next/router";
+<<<<<<< HEAD
 import { userInfo } from "os";
+=======
+import { GET_CURRENT_USER } from "../../graphql/queries";
+>>>>>>> 86fccd968d499cbd03a2d455424e7374e6c296db
 
 
 interface UserSubmitForm {
@@ -17,7 +21,7 @@ interface UserSubmitForm {
 
 }
 
-const RegisterPage: NextPage = () => {
+const LoginPage: NextPage = () => {
 
     const [loginUser, { loading }] = useMutation<{
         email: string,
@@ -31,12 +35,13 @@ const RegisterPage: NextPage = () => {
         resolver: yupResolver(loginValidation)
     });
 
-    const onSubmit = (data: UserSubmitForm) => {
+    const onSubmit = async (data: UserSubmitForm) => {
 
-        loginUser({
+       await loginUser({
             variables: {
                 email: data.email,
                 password: data.password,
+<<<<<<< HEAD
             }
         }).then(({ data }) => {
             // use toast notification
@@ -45,6 +50,17 @@ const RegisterPage: NextPage = () => {
 
 
         })
+=======
+            },
+            refetchQueries: [
+                {
+                    query: GET_CURRENT_USER
+                }   
+            ]
+        }).then(({data}) => {
+            console.log(data);
+        });
+>>>>>>> 86fccd968d499cbd03a2d455424e7374e6c296db
     };
 
 
@@ -123,4 +139,4 @@ const RegisterPage: NextPage = () => {
     )
 }
 
-export default RegisterPage
+export default LoginPage

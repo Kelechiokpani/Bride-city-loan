@@ -2,6 +2,7 @@ import {FC} from "react";
 import Sidebar from "../sidebar";
 import Header from "../header";
 import Footer from "../footer";
+import withAuthenticator from "../../utils/authenticator";
 
 type Props = {
     children?: JSX.Element | JSX.Element[]
@@ -25,5 +26,10 @@ const DashboardLayout: FC<Props> = ({children}: Props) => {
     )
 }
 
+export const getServerSideProps = withAuthenticator((ctx: any) => {
+    return {
+        props: {}
+    };
+});
 
 export default DashboardLayout

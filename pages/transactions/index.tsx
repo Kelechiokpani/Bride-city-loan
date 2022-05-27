@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import TransactionsList from "../../components/TransactionsList";
+import withKycEnabled from "../../utils/kycChecker";
 
 
 const Transactions: NextPage = () => {
@@ -48,5 +49,11 @@ const Transactions: NextPage = () => {
         </DashboardLayout>
     )
 }
+
+export const getServerSideProps = withKycEnabled((ctx: any) => {
+    return {
+        props: {}
+    };
+});
 
 export default Transactions

@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import Switcher from "../../components/Account/switcher";
+import withKycEnabled from "../../utils/kycChecker";
 
 
 const AccountProfile: NextPage = () => {
@@ -159,5 +160,11 @@ const AccountProfile: NextPage = () => {
         </DashboardLayout>
     )
 }
+
+export const getServerSideProps = withKycEnabled((ctx: any) => {
+    return {
+        props: {}
+    };
+});
 
 export default AccountProfile
