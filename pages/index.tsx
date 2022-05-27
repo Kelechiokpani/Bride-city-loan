@@ -11,7 +11,7 @@ const Home: NextPage = () => {
                 <div className="container-xl wide-lg">
                     <div className="nk-content-body">
                         <div className="nk-block-head">
-                            <div className="nk-block-head-sub"><span>Welcome!</span>
+                            <div className="nk-block-head-sub"><span>Welcome! A</span>
                             </div>
                             <div className="nk-block-between-md g-4">
                                 <div className="nk-block-head-content">
@@ -221,7 +221,7 @@ const Home: NextPage = () => {
                                                     <em className="icon ni ni-link-alt"></em>
                                                 </div>
                                                 <input type="text" className="form-control copy-text" id="refUrl"
-                                                   />
+                                                />
                                             </div>
                                         </div>
                                     </div>

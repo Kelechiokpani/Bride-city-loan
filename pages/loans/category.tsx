@@ -8,6 +8,7 @@ import Select from 'react-select'
 import AsyncSelect from 'react-select/async';
 
 
+
 const LoanCategory: NextPage = () => {
 
     const loancategory = [

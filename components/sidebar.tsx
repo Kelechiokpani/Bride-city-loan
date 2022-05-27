@@ -1,6 +1,8 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import 'simplebar';
+import 'simplebar/dist/simplebar.css';
 
 const Sidebar: FC = () => {
 
@@ -27,9 +29,10 @@ const Sidebar: FC = () => {
                 </div>
             </div>
             {/*nk-sidebar-element*/}
-            <div className="nk-sidebar-element">
-                <div className="nk-sidebar-body" data-simplebar>
+            <div className="nk-sidebar-element sidebarMenu">
+                <div className="nk-sidebar-body" >
                     <div className="nk-sidebar-content">
+                        {/* data-simplebar */}
                         <div className="nk-sidebar-widget d-none d-xl-block">
                             <div className="user-account-info between-center">
                                 <div className="user-account-main">

@@ -8,6 +8,7 @@ import { loginValidation } from "../../validations";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../graphql/mutations";
 import Router from "next/router";
+import { userInfo } from "os";
 
 
 interface UserSubmitForm {
@@ -41,6 +42,8 @@ const RegisterPage: NextPage = () => {
             // use toast notification
 
             Router.push('/onboarding/email')
+
+
         })
     };
 
