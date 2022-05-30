@@ -4654,7 +4654,7 @@ div.dataTables_wrapper div.dataTables_filter .form-floating > input:not(:placeho
 
 .card-body {
   flex: 1 1 auto;
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1rem;
 }
 
 .card-title {
@@ -15349,10 +15349,10 @@ a:hover .btn-trigger:before {
 }
 
 .card + .card:not(.card .card + .card) {
-  margin-top: 28px;
+  margin-top: 23px;
 }
 .card + .nk-block-head {
-  padding-top: 2.5rem;
+  padding-top: 2.2rem;
 }
 .card-full {
   height: 100%;
@@ -29570,6 +29570,15 @@ body.nav-shown {
   background-size: cover;
   /* background: rgba(0, 0, 0, 0.5); */
 }
+.bg-select{
+  background-color: #fff;
+  width:100%;
+  padding:70px;
+  font-size: 18px;
+}
+.bg-select option{
+  padding:30px;
+}
 .nk-main {
   position: relative;
 }
@@ -33317,8 +33326,8 @@ body.toggle-shown {
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
   }
   .nk-block-tools-toggle .nk-block-tools {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
   .nk-block-tools-toggle .nk-block-tools-opt {
     margin-left: auto;
@@ -34934,7 +34943,8 @@ button.close {
   color: #526484;
 }
 .tb-tnx-desc {
-  padding-right: 0.5rem;
+  /* padding-right: 1.4rem; */
+  /* padding-left: 1rem; */
 }
 .tb-tnx-item .tb-tnx-date {
   color: #8094ae;
@@ -34982,7 +34992,7 @@ button.close {
     border-bottom: 1px solid #e5e9f2;
   }
   .tb-tnx-amount {
-    width: 110px;
+    width: 100px;
     text-align: right;
   }
   .tb-tnx-id, .tb-tnx-head th:first-child {
@@ -34991,13 +35001,13 @@ button.close {
     flex-grow: 0 !important;
   }
   .tb-tnx-info {
-    width: 45%;
+    width: 65%;
   }
   .tb-tnx-date .date {
     font-size: 12px;
   }
   .tb-tnx-date .date + .date {
-    padding-left: 0.5rem;
+    padding-left: 0.4rem;
   }
   .tb-tnx-action:last-child {
     flex-grow: 0;
@@ -35017,7 +35027,9 @@ button.close {
     padding-left: 1.25rem;
   }
   .tb-tnx-info {
-    width: 65%;
+    width: 100%;
+    margin-left: 2rem;
+    margin-right: 3rem;
   }
   .tb-tnx-amount:last-child {
     width: 25%;

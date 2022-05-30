@@ -8,11 +8,7 @@ import { loginValidation } from "../../validations";
 import { useMutation, useQuery } from "@apollo/client";
 import { LOGIN_USER } from "../../graphql/mutations";
 import Router from "next/router";
-<<<<<<< HEAD
-import { userInfo } from "os";
-=======
 import { GET_CURRENT_USER } from "../../graphql/queries";
->>>>>>> 86fccd968d499cbd03a2d455424e7374e6c296db
 
 
 interface UserSubmitForm {
@@ -37,30 +33,19 @@ const LoginPage: NextPage = () => {
 
     const onSubmit = async (data: UserSubmitForm) => {
 
-       await loginUser({
+        await loginUser({
             variables: {
                 email: data.email,
                 password: data.password,
-<<<<<<< HEAD
-            }
-        }).then(({ data }) => {
-            // use toast notification
-
-            Router.push('/onboarding/email')
-
-
-        })
-=======
             },
             refetchQueries: [
                 {
                     query: GET_CURRENT_USER
-                }   
+                }
             ]
-        }).then(({data}) => {
+        }).then(({ data }) => {
             console.log(data);
         });
->>>>>>> 86fccd968d499cbd03a2d455424e7374e6c296db
     };
 
 

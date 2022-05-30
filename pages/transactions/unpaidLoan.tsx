@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
-import TransactionsList from "../../components/userlogs/ApplicationLog"
+import UnpaidLoanLog from "../../components/userlogs/unpaidloanLog";
 import withKycEnabled from "../../utils/kycChecker";
 
 
-const Transactions: NextPage = () => {
+const UnpadLoan: NextPage = () => {
     return (
         <DashboardLayout>
             <div className="nk-content nk-content-fluid">
@@ -13,9 +13,9 @@ const Transactions: NextPage = () => {
                         <div className="nk-block-head nk-block-head-sm">
                             <div className="nk-block-between g-3">
                                 <div className="nk-block-head-content">
-                                    <h3 className="nk-block-title page-title">Transactions History</h3>
+                                    <h3 className="nk-block-title page-title">Debt History</h3>
                                     <div className="nk-block-des text-soft">
-                                        <p>You have a total of 20 Transactions.</p>
+                                        <p>You have a total of 24 unpaid Debts.</p>
                                     </div>
                                 </div>
 
@@ -40,12 +40,13 @@ const Transactions: NextPage = () => {
                             </div>
 
                         </div>
+                        <UnpaidLoanLog />
 
-                        <TransactionsList />
 
                     </div>
                 </div>
             </div>
+
         </DashboardLayout>
     )
 }
@@ -56,4 +57,4 @@ const Transactions: NextPage = () => {
 //     };
 // });
 
-export default Transactions
+export default UnpadLoan

@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext, NextPage } from 'next'
 import Link from 'next/link';
 import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
-import TransactionsList from "../components/TransactionsList";
+import TransactionsList from "../components/ApplicationLog";
 import withAuthenticator from "../utils/authenticator";
 import withKycEnabled from '../utils/kycChecker';
 const Home: NextPage = () => {
@@ -277,10 +277,10 @@ const Home: NextPage = () => {
     )
 }
 
-export const getServerSideProps = withKycEnabled((ctx: any) => {
-    return {
-        props: {}
-    };
-});
+// export const getServerSideProps = withKycEnabled((ctx: any) => {
+//     return {
+//         props: {}
+//     };
+// });
 
 export default Home;
