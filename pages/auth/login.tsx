@@ -33,7 +33,7 @@ const LoginPage: NextPage = () => {
 
     const onSubmit = async (data: UserSubmitForm) => {
 
-       await loginUser({
+        await loginUser({
             variables: {
                 email: data.email,
                 password: data.password,
@@ -41,9 +41,9 @@ const LoginPage: NextPage = () => {
             refetchQueries: [
                 {
                     query: GET_CURRENT_USER
-                }   
+                }
             ]
-        }).then(({data}) => {
+        }).then(({ data }) => {
             console.log(data);
         });
     };

@@ -3,10 +3,52 @@ import { NextRouter, useRouter } from "next/router";
 import Link from "next/link";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import withKycEnabled from "../../utils/kycChecker";
+import { useState } from "react";
+import DatePicker from "react-date-picker";
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loanApplicationForm } from "../../validations/index";
+import { date } from "yup";
 
+
+
+
+interface UserSubmitForm {
+    firstname: string;
+    lastname: string;
+    email: string;
+    phone: string;
+    date: string;
+    lga: string;
+    address: string;
+    city: string;
+    state: string;
+    nationality: string;
+    zipcode: string;
+
+}
 
 const LoanApplication: NextPage = () => {
     const router: NextRouter = useRouter()
+    // const [startDate, setStartDate] = useState(new Date());
+
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors }
+    } = useForm<UserSubmitForm>({
+        resolver: yupResolver(loanApplicationForm)
+    });
+
+    const onSubmit = (data: UserSubmitForm) => {
+        console.log(JSON.stringify(data, null, 2));
+        router.push('/loans/guarantor')
+    };
+
+
+
 
     return (
         <DashboardLayout>
@@ -23,11 +65,13 @@ const LoanApplication: NextPage = () => {
                                 </div>
                             </div>
 
-                            <form action="">
 
-                                <div className="nk-block">
-                                    <div className="card card-bordered">
-                                        <div className="nk-kycfm">
+
+                            <div className="nk-block">
+                                <div className="card card-bordered">
+                                    <div className="nk-kycfm">
+                                        <form action="" onSubmit={handleSubmit(onSubmit)}>
+
                                             <div className="nk-kycfm-head">
                                                 <div className="nk-kycfm-count">01</div>
                                                 <div className="nk-kycfm-title">
@@ -45,6 +89,7 @@ const LoanApplication: NextPage = () => {
                                                         details.
                                                         Your can’t edit these details once you submitted the form.</p>
                                                 </div>
+
                                                 <div className="row g-4">
                                                     <div className="col-md-6">
                                                         <div className="form-group">
@@ -54,7 +99,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('firstname')}
+                                                                    className={`form-control form-control-lg ${errors.firstname ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.firstname?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -67,7 +114,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('lastname')}
+                                                                    className={`form-control form-control-lg ${errors.lastname ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.lastname?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -80,7 +129,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('email')}
+                                                                    className={`form-control form-control-lg ${errors.email ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.email?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -92,7 +143,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('phone')}
+                                                                    className={`form-control form-control-lg ${errors.phone ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.phone?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -100,12 +153,17 @@ const LoanApplication: NextPage = () => {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <div className="form-label-group">
-                                                                <label className="form-label">Date of Birth <span
+                                                                <label className="form-label">Loan Application Date <span
                                                                     className="text-danger">*</span></label>
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
                                                                     className="form-control form-control-lg date-picker-alt" />
+                                                                {/* <DatePicker
+                                                                    selected={startDate}
+                                                                    onChange={(date) => setStartDate(date)}
+
+                                                                /> */}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -118,7 +176,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('lga')}
+                                                                    className={`form-control form-control-lg ${errors.lga ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.lga?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -151,7 +211,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('address')}
+                                                                    className={`form-control form-control-lg ${errors.address ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.address?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -163,7 +225,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('address')}
+                                                                    className={`form-control form-control-lg ${errors.address ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.address?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -176,7 +240,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('city')}
+                                                                    className={`form-control form-control-lg ${errors.city ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.city?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -189,7 +255,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('state')}
+                                                                    className={`form-control form-control-lg ${errors.state ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.state?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -202,7 +270,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg date-picker-alt" />
+                                                                    {...register('nationality')}
+                                                                    className={`form-control form-control-lg ${errors.nationality ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.nationality?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -215,7 +285,9 @@ const LoanApplication: NextPage = () => {
                                                             </div>
                                                             <div className="form-control-group">
                                                                 <input type="text"
-                                                                    className="form-control form-control-lg" />
+                                                                    {...register('zipcode')}
+                                                                    className={`form-control form-control-lg ${errors.zipcode ? 'is-invalid' : ''}`} />
+                                                                <div className="invalid-feedback">{errors.zipcode?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -226,17 +298,18 @@ const LoanApplication: NextPage = () => {
 
                                             </div>
                                             <button className="btn btn-lg   ">
-                                                <Link href='/loans/guarantor'>
-                                                    Next
-                                                </Link>
+                                                Next
                                             </button>
-                                        </div>
+                                        </form>
 
                                     </div>
-
+                                    {/* <button className="btn btn-lg btn-primary btn-block" >Nexts</button> */}
                                 </div>
 
-                            </form>
+                            </div>
+
+
+
 
                         </div>
 
@@ -247,10 +320,10 @@ const LoanApplication: NextPage = () => {
     )
 }
 
-export const getServerSideProps = withKycEnabled((ctx: any) => {
-    return {
-        props: {}
-    };
-});
+// export const getServerSideProps = withKycEnabled((ctx: any) => {
+//     return {
+//         props: {}
+//     };
+// });
 
 export default LoanApplication

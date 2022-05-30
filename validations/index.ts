@@ -1,4 +1,10 @@
 import * as Yup from 'yup';
+import * as moment from 'moment';
+
+
+
+
+
 
 export const newUserValidation = Yup.object().shape({
     email: Yup.string()
@@ -50,6 +56,64 @@ export const identityVerificationValidation = Yup.object().shape({
         .min(10)
         //   .max(12)
         .required('A valid bank verification number is required'),
+
+})
+
+
+// Loan Application 
+export const loanApplicationForm = Yup.object().shape({
+
+
+    firstname: Yup.string()
+        .required('FirstName is required'),
+    lastname: Yup.string()
+        .required('LastName is required'),
+    email: Yup.string()
+        .required('Email is required')
+        .email('Email is invalid'),
+    phone: Yup.number()
+        .typeError("That doesn't look like a phone number")
+        .positive("A phone number can't start with a minus")
+        .integer("A phone number can't include a decimal point")
+        .min(11)
+        .required('A phone number is required'),
+
+    dateOfBirth: Yup.date().max(new Date(), "Are you a time traveler?!"),
+
+
+    occupation: Yup.string()
+        .required('This Field  is required'),
+    relationshipstatus: Yup.string()
+        .required('State your Relation With this person'),
+    lga: Yup.string()
+        .required('Local Govt, Area  is required'),
+    address: Yup.string()
+        .required('Local Govt, Area  is required'),
+    city: Yup.string()
+        .required('City  is required'),
+    state: Yup.string()
+        .required('State of Residence  is required'),
+    nationality: Yup.string()
+        .required('Nationality  is required'),
+    zipcode: Yup.string()
+        .required()
+        .matches(/^[0-9]+$/, "Must be only digits")
+        .min(5, 'Must be exactly 5 digits')
+        .max(5, 'Must be exactly 5 digits'),
+
+
+    selectpackage: Yup.string()
+        .required("status is required (from label)"),
+    selectrequirement: Yup.string()
+        .required("status is required (from label)"),
+    selectamount: Yup.string()
+        .required("status is required (from label)"),
+    selectpayback: Yup.string()
+        .required("status is required (from label)"),
+
+    // value: Yup.string().required("status is required")
+    // .nullable() // for handling null value when clearing options via clicking "x"
+    // .required("status is required (from outter null check)")
 
 })
 
