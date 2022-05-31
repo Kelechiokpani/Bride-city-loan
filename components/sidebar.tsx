@@ -8,7 +8,8 @@ const Sidebar: FC = () => {
         <div className="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
-                    <a href="/" className="logo-link nk-sidebar-logo" style={{ paddingTop: "10vh" }}>
+                    <Link href={'/'}>
+                        <a className="logo-link nk-sidebar-logo" style={{ paddingTop: "10vh" }}>
                         <Image className="logo-light logo-img" src="/images/logo.png"
                             // srcSet="/images/logo2x.png 2x"
                             alt="logo"
@@ -20,6 +21,7 @@ const Sidebar: FC = () => {
                             height={50} />
                         <span className="nio-version">Bride City</span>
                     </a>
+                    </Link>
                 </div>
                 <div className="nk-menu-trigger me-n2">
                     <a href="#" className="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em
