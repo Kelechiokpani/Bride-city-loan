@@ -1,6 +1,8 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import 'simplebar';
+import 'simplebar/dist/simplebar.css';
 
 const Sidebar: FC = () => {
 
@@ -29,9 +31,10 @@ const Sidebar: FC = () => {
                 </div>
             </div>
             {/*nk-sidebar-element*/}
-            <div className="nk-sidebar-element">
-                <div className="nk-sidebar-body" data-simplebar>
+            <div className="nk-sidebar-element sidebarMenu">
+                <div className="nk-sidebar-body" >
                     <div className="nk-sidebar-content">
+                        {/* data-simplebar */}
                         <div className="nk-sidebar-widget d-none d-xl-block">
                             <div className="user-account-info between-center">
                                 <div className="user-account-main">
@@ -149,14 +152,26 @@ const Sidebar: FC = () => {
                         {/* -------------------------- */}
                         <div className="nk-sidebar-menu">
                             <ul className="nk-menu">
-                                <li className="nk-menu-heading">
+                                {/* <li className="nk-menu-heading">
                                     <span className="nk-menu-icon">
-                                        <em className="icon ni ni-dashboard"> </em>Dashboard</span>
+                                        <em
+                                            className="icon ni ni-wallet-alt"></em>Dashboard</span>
 
+                                </li> */}
+                                <li className="nk-menu-item">
+                                    <Link href="/">
+                                        <a href="" className="nk-menu-link">
+                                            <span className="nk-menu-icon">
+                                                <em className="icon ni ni-dashboard"> </em>
+                                            </span>
+                                            <span className="nk-menu-text">Overview</span>
+                                        </a>
+
+                                    </Link>
                                 </li>
 
                                 <li className="nk-menu-item">
-                                    <Link href="/account/profile">
+                                    <Link href="/account">
                                         <a href="" className="nk-menu-link">
                                             <span className="nk-menu-icon"><em className="icon ni ni-account-setting"></em></span>
                                             <span className="nk-menu-text">My Profile</span>
@@ -172,18 +187,9 @@ const Sidebar: FC = () => {
                                         </a>
                                     </Link>
                                 </li>
-                                <li className="nk-menu-item">
-                                    <Link href="/transactions/index">
-                                        <a href="" className="nk-menu-link">
-                                            <span className="nk-menu-icon"><em
-                                                className="icon ni ni-wallet-alt"></em></span>
-                                            <span className="nk-menu-text">Transaction</span>
-                                        </a>
 
-                                    </Link>
-                                </li>
                                 <li className="nk-menu-item">
-                                    <Link href="/transactions/withdrawal">
+                                    <Link href="/transactions/unpaidLoan">
                                         <a href="" className="nk-menu-link">
                                             <span className="nk-menu-icon"><em className="icon ni ni-coins"></em></span>
                                             <span className="nk-menu-text">Unpaid Loan</span>
@@ -191,10 +197,18 @@ const Sidebar: FC = () => {
                                     </Link>
                                 </li>
                                 <li className="nk-menu-item">
-                                    <Link href="/transactions/pendingloan">
+                                    <Link href="/transactions/withdrawal">
                                         <a href="" className="nk-menu-link">
                                             <span className="nk-menu-icon"><em className="icon ni ni-repeat"></em></span>
-                                            <span className="nk-menu-text">Pending Loans</span>
+                                            <span className="nk-menu-text">Withdrawal</span>
+                                        </a>
+                                    </Link>
+                                </li>  <li className="nk-menu-item">
+                                    <Link href="/transactions">
+                                        <a href="" className="nk-menu-link">
+                                            <span className="nk-menu-icon">  <em
+                                                className="icon ni ni-wallet-alt"></em></span>
+                                            <span className="nk-menu-text">Transactions</span>
                                         </a>
                                     </Link>
                                 </li>

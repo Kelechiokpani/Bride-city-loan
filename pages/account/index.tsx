@@ -161,10 +161,10 @@ const AccountProfile: NextPage = () => {
     )
 }
 
-export const getServerSideProps = withKycEnabled((ctx: any) => {
-    return {
-        props: {}
-    };
-});
+// export const getServerSideProps = withKycEnabled((ctx: any) => {
+//     return {
+//         props: {}
+//     };
+// });
 
 export default AccountProfile

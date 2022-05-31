@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return (
         <>
+
             <Head>
                 <base href="../../" />
                 <meta charSet="utf-8" />
@@ -25,7 +26,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <ApolloProvider client={apolloClient}>
                 <Component {...pageProps} />
             </ApolloProvider>
-            <ExternalScripts />
+            
+            < ExternalScripts />
         </>
     )
 }

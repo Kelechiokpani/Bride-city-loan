@@ -2,7 +2,7 @@ import type { GetServerSidePropsContext, NextPage } from 'next'
 import Link from 'next/link';
 import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
-import TransactionsList from "../components/TransactionsList";
+import TransactionsList from "../components/ApplicationLog";
 import withAuthenticator from "../utils/authenticator";
 import withKycEnabled from '../utils/kycChecker';
 const Home: NextPage = () => {
@@ -12,7 +12,7 @@ const Home: NextPage = () => {
                 <div className="container-xl wide-lg">
                     <div className="nk-content-body">
                         <div className="nk-block-head">
-                            <div className="nk-block-head-sub"><span>Welcome!</span>
+                            <div className="nk-block-head-sub"><span>Welcome! A</span>
                             </div>
                             <div className="nk-block-between-md g-4">
                                 <div className="nk-block-head-content">
@@ -222,7 +222,7 @@ const Home: NextPage = () => {
                                                     <em className="icon ni ni-link-alt"></em>
                                                 </div>
                                                 <input type="text" className="form-control copy-text" id="refUrl"
-                                                   />
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -277,10 +277,10 @@ const Home: NextPage = () => {
     )
 }
 
-export const getServerSideProps = withKycEnabled((ctx: any) => {
-    return {
-        props: {}
-    };
-});
+// export const getServerSideProps = withKycEnabled((ctx: any) => {
+//     return {
+//         props: {}
+//     };
+// });
 
 export default Home;

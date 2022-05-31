@@ -31,3 +31,36 @@ mutation UploadUtilityBill($image: String!) {
     uploadUtilityBill(image: $image)
 }
 `;
+
+// Loan Application
+// personal Form---------------
+export const LOAN_APPLICATION = gql`
+mutation  LoanApplication(
+    $firstname: String!
+    $lastname: String! 
+    $email: String! 
+    $address:string!
+    $number: String!
+    $date: string!
+    $lga: string!
+    $city: string!
+    $nationality: string!
+    ) {
+    loanApplication(
+        firstname: $firstname
+        lastname: $lastname 
+        email: $email  
+        address: $string
+        number: $number
+        dateofbirth: $string
+        lga: $string
+        address:$string
+        state: $string
+        nationality: $string
+        
+        )
+}
+
+`
+// Guarantor's Form
+

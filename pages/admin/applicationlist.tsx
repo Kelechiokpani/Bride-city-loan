@@ -1,22 +1,19 @@
 import { NextPage } from "next";
-import DashboardLayout from "../../components/Layouts/dashboard";
-import TransactionsList from "../../components/userlogs/ApplicationLog"
-import withKycEnabled from "../../utils/kycChecker";
+import AdminApplicationList from "../../components/ApplicationList";
+import AdminLayout from "../../components/Layouts/admin";
 
 
-const Transactions: NextPage = () => {
+const Application: NextPage = () => {
     return (
-        <DashboardLayout>
+        <AdminLayout>
             <div className="nk-content nk-content-fluid">
                 <div className="container-xl wide-lg">
                     <div className="nk-content-body">
                         <div className="nk-block-head nk-block-head-sm">
                             <div className="nk-block-between g-3">
                                 <div className="nk-block-head-content">
-                                    <h3 className="nk-block-title page-title">Transactions History</h3>
-                                    <div className="nk-block-des text-soft">
-                                        <p>You have a total of 20 Transactions.</p>
-                                    </div>
+                                    <h3 className="nk-block-title page-title">Application History</h3>
+
                                 </div>
 
                                 <div className="nk-block-head-content">
@@ -28,8 +25,8 @@ const Transactions: NextPage = () => {
                                                 <div className="dropdown-menu dropdown-menu-end">
                                                     <ul className="link-list-opt no-bdr">
                                                         <li><a href="#"><span>Add User</span></a></li>
-                                                        <li><a href="#"><span>Add Team</span></a></li>
-                                                        <li><a href="#"><span>Import User</span></a></li>
+                                                        <li><a href="#"><span>Assign user to Attendant</span></a></li>
+                                                        <li><a href="#"><span>Add attendant</span></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -41,19 +38,13 @@ const Transactions: NextPage = () => {
 
                         </div>
 
-                        <TransactionsList />
+                        <AdminApplicationList />
 
                     </div>
                 </div>
             </div>
-        </DashboardLayout>
+        </AdminLayout>
     )
 }
 
-// export const getServerSideProps = withKycEnabled((ctx: any) => {
-//     return {
-//         props: {}
-//     };
-// });
-
-export default Transactions
+export default Application

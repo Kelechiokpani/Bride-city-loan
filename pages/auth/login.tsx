@@ -34,7 +34,7 @@ const LoginPage: NextPage = () => {
 
     const onSubmit = async (data: UserSubmitForm) => {
 
-       await loginUser({
+        await loginUser({
             variables: {
                 email: data.email,
                 password: data.password,

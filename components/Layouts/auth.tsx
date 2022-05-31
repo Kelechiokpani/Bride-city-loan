@@ -1,4 +1,4 @@
-import {FC} from "react";
+import { FC } from "react";
 import classNames from "classnames";
 
 type Props = {
@@ -24,13 +24,13 @@ const AuthLayout: FC<Props> = ({ children, wide = false }: Props) => {
                                         <a href="/" className="logo-link">
 
                                             <img className="logo-light logo-img logo-img-lg" src="/images/logo.png"
-                                                 srcSet="/images/logo2x.png 2x" alt="logo"/>
+                                                srcSet="/images/logo2x.png 2x" alt="logo" />
                                             <img className="logo-dark logo-img logo-img-lg" src="/images/logo-dark.png"
-                                                 srcSet="/images/logo-dark2x.png 2x" alt="logo-dark"/>
+                                                srcSet="/images/logo-dark2x.png 2x" alt="logo-dark" />
 
                                         </a>
                                     </div>
-                                         { children }
+                                    {children}
                                 </div>
                                 <div className="nk-footer nk-auth-footer-full">
                                     <div className="container wide-lg">
