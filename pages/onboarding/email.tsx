@@ -4,8 +4,6 @@ import AuthLayout from "../../components/Layouts/auth";
 import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup'
-import { useState } from "react";
 import { codeVerificationValidatoion } from "../../validations";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { CODE_VERIFICATION } from "../../graphql/mutations";
@@ -22,10 +20,9 @@ const EmailOnBoarding: NextPage = () => {
 
     interface UserSubmitForm {
         code: string;
-    };
+    }
 
-
-
+    
     const {
         register,
         handleSubmit,

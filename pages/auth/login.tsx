@@ -45,7 +45,6 @@ const LoginPage: NextPage = () => {
                 // get current user
                 getCurrentUser().then(({data: {getCurrentUser}}) =>  {
                     setCookies('x-user', getCurrentUser);
-
                 }) .finally(() => Router.push('/'));
             }
         });

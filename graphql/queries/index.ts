@@ -6,12 +6,17 @@ getCurrentUser {
     _id
     email
     phone
-    firstName
-    lastName
-    emailVerified
-    phoneVerified
-    bvnVerified
-    utilityBill
+    verification {
+        emailVerified
+        phoneVerified
+        bvnVerified
+    }
+    profile {
+        firstName
+        lastName
+        avatar
+        isBlocked
+    }
 }
 }
 `;
