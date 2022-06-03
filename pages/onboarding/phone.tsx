@@ -9,6 +9,7 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import { CODE_VERIFICATION } from "../../graphql/mutations";
 import { GET_CURRENT_USER } from "../../graphql/queries";
 import { setCookies } from "cookies-next";
+import { toast } from "react-toastify";
 
 
 
@@ -37,13 +38,10 @@ const PhoneOnBoarding: NextPage = () => {
             }
         }).then(({data: {codeVerification}}) => {
             if(codeVerification === 'success') {
-
-                // get current user
-                getCurrentUser().then(({data: {getCurrentUser}}) =>  {
-                    setCookies('x-user', getCurrentUser);
-
-                }) .finally(() => router.push('/'));
+               router.push('/onboarding/bvn');
             }
+        }).catch(err => {
+            toast.error(err.message)
         })
 
     };
