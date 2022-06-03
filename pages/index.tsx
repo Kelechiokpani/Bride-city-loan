@@ -1,22 +1,25 @@
-import type { GetServerSidePropsContext, NextPage } from 'next'
+import type { NextPage } from 'next'
 import Link from 'next/link';
 import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
 import TransactionsList from "../components/ApplicationLog";
-import withAuthenticator from "../utils/authenticator";
-import withKycEnabled from '../utils/kycChecker';
+import { useQuery } from '@apollo/client';
+import { GET_CURRENT_USER } from '../graphql/queries';
 const Home: NextPage = () => {
+    const { data: currentUser, loading: loadingCurrentUser } = useQuery(GET_CURRENT_USER);
     return (
         <DashboardLayout>
             <div className="nk-content nk-content-fluid">
                 <div className="container-xl wide-lg">
-                    <div className="nk-content-body">
+                    {
+                        !loadingCurrentUser ? (
+                            <div className="nk-content-body">
                         <div className="nk-block-head">
-                            <div className="nk-block-head-sub"><span>Welcome! A</span>
+                            <div className="nk-block-head-sub"><span>Welcome! {currentUser?.getCurrentUser?.profile?.firstName}</span>
                             </div>
                             <div className="nk-block-between-md g-4">
                                 <div className="nk-block-head-content">
-                                    <h2 className="nk-block-title fw-normal">Abu Bin Ishityak</h2>
+                                    <h2 className="nk-block-title fw-normal">{currentUser?.getCurrentUser?.profile?.firstName + ' ' + currentUser?.getCurrentUser?.profile?.lastName}</h2>
                                     <div className="nk-block-des">
                                         <p>At a glance summary of your account. Have fun!</p>
                                     </div>
@@ -270,6 +273,8 @@ const Home: NextPage = () => {
                         </div>
 
                     </div>
+                        ) : (<></>)
+                    }
                 </div>
             </div>
         </DashboardLayout>

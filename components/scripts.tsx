@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 
-const ExternalScripts: () => false | JSX.Element = () => {
+const ExternalScripts: () => JSX.Element = () => {
 
     return (
          <>

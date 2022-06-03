@@ -6,3 +6,11 @@
  * Version	 :	1.0.0
  * Updated	 :	07.23.2020
 **/
+
+.pointer {
+    cursor: pointer;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
