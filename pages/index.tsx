@@ -5,8 +5,19 @@ import DashboardLayout from "../components/Layouts/dashboard";
 import TransactionsList from "../components/ApplicationLog";
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../graphql/queries';
+import { useEffect, useState } from 'react';
+import { User } from '../graphql/types';
 const Home: NextPage = () => {
     const { data: currentUser, loading: loadingCurrentUser } = useQuery(GET_CURRENT_USER);
+
+    const [user, setUser] = useState<User>()
+
+    useEffect(() => {
+        if (currentUser && currentUser.getCurrentUser) {
+            setUser(currentUser.getCurrentUser)
+        }
+    }, [currentUser]);
+
     return (
         <DashboardLayout>
             <div className="nk-content nk-content-fluid">
@@ -15,11 +26,11 @@ const Home: NextPage = () => {
                         !loadingCurrentUser ? (
                             <div className="nk-content-body">
                         <div className="nk-block-head">
-                            <div className="nk-block-head-sub"><span>Welcome! {currentUser?.getCurrentUser?.profile?.firstName}</span>
+                            <div className="nk-block-head-sub"><span className='capitalize'>Welcome! {user?.profile?.firstName}</span>
                             </div>
                             <div className="nk-block-between-md g-4">
                                 <div className="nk-block-head-content">
-                                    <h2 className="nk-block-title fw-normal">{currentUser?.getCurrentUser?.profile?.firstName + ' ' + currentUser?.getCurrentUser?.profile?.lastName}</h2>
+                                    <h2 className="nk-block-title fw-normal capitalize">{user?.profile?.firstName + ' ' + user?.profile?.lastName}</h2>
                                     <div className="nk-block-des">
                                         <p>At a glance summary of your account. Have fun!</p>
                                     </div>
