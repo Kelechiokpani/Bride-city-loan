@@ -5,12 +5,9 @@ import Link from "next/link";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidation } from "../../validations";
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../graphql/mutations";
 import Router from "next/router";
-import { GET_CURRENT_USER } from "../../graphql/queries";
-import { User } from "../../graphql/types";
-import { getCookie, setCookies } from "cookies-next";
 
 
 interface UserSubmitForm {
@@ -20,9 +17,6 @@ interface UserSubmitForm {
 }
 
 const LoginPage: NextPage = () => {
-
-    const [getCurrentUser] = useLazyQuery(GET_CURRENT_USER);
-
     const [loginUser, { loading }] = useMutation(LOGIN_USER)
     const {
         register,
@@ -41,11 +35,7 @@ const LoginPage: NextPage = () => {
             }
         }).then(({data: {loginUser}}) => {
             if(loginUser === 'login completed') {
-
-                // get current user
-                getCurrentUser().then(({data: {getCurrentUser}}) =>  {
-                    setCookies('x-user', getCurrentUser);
-                }) .finally(() => Router.push('/'));
+                Router.push('/')
             }
         });
     };

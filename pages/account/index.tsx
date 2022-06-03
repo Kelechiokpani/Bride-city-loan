@@ -1,10 +1,16 @@
 import { NextPage } from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import Switcher from "../../components/Account/switcher";
-import withKycEnabled from "../../utils/kycChecker";
+import { useQuery } from "@apollo/client";
+import { GET_CURRENT_USER } from "../../graphql/queries";
 
 
 const AccountProfile: NextPage = () => {
+
+    const { data, loading } = useQuery(GET_CURRENT_USER)
+
+    data && data.getCurrentUser && console.log(data.getCurrentUser)
+
     return (
         <DashboardLayout>
             <div className="nk-content nk-content-fluid">
@@ -25,24 +31,9 @@ const AccountProfile: NextPage = () => {
 
                         <Switcher activeTab={'Personal'} />
 
-                        <div className="nk-block">
-                            <div className="alert alert-warning">
-                                <div className="alert-cta flex-wrap flex-md-nowrap">
-                                    <div className="alert-text">
-                                        <p>Upgrade your account to unlock full feature and increase your limit of
-                                            transaction amount.</p>
-                                    </div>
-                                    <ul className="alert-actions gx-3 mt-3 mb-1 my-md-0">
-                                        <li className="order-md-last">
-                                            <a href="#" className="btn btn-sm btn-warning">Upgrade</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" className="link link-primary">Learn More</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
+                        {
+                            loading ? <div>Loading...</div> : (
+                                <div className="nk-block">
                             <div className="nk-block-head">
                                 <div className="nk-block-head-content">
                                     <h5 className="nk-block-title">Personal Information</h5>
@@ -59,7 +50,7 @@ const AccountProfile: NextPage = () => {
                                 <div className="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                                     <div className="data-col">
                                         <span className="data-label">Full Name</span>
-                                        <span className="data-value">Abu Bin Ishtiyak</span>
+                                        <span className="data-value">{}</span>
                                     </div>
                                     <div className="data-col data-col-end"><span className="data-more"><em
                                         className="icon ni ni-forward-ios"></em></span></div>
@@ -153,6 +144,8 @@ const AccountProfile: NextPage = () => {
                             </div>
 
                         </div>
+                            )
+                        }
 
                     </div>
                 </div>
@@ -160,11 +153,5 @@ const AccountProfile: NextPage = () => {
         </DashboardLayout>
     )
 }
-
-// export const getServerSideProps = withKycEnabled((ctx: any) => {
-//     return {
-//         props: {}
-//     };
-// });
 
 export default AccountProfile

@@ -137,11 +137,4 @@ const Activity: NextPage = () => {
         </DashboardLayout>
     )
 }
-
-// export const getServerSideProps = withKycEnabled((ctx: any) => {
-//     return {
-//         props: {}
-//     };
-// });
-
 export default Activity

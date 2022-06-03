@@ -59,8 +59,23 @@ export const identityVerificationValidation = Yup.object().shape({
 
 })
 
+// Account Setup Form
 
-// Loan Application 
+export const accountSetupFormValidation = Yup.object().shape({
+    firstName: Yup.string()
+        .required('FirstName is required'),
+    lastName: Yup.string()
+        .required('LastName is required'),
+    street: Yup.string()
+        .required('Street is required'),
+    city: Yup.string()
+        .required('City  is required'),
+    state: Yup.string()
+        .required('State of Residence  is required'),
+});
+
+
+// Loan Application
 export const loanApplicationForm = Yup.object().shape({
 
 
@@ -116,4 +131,3 @@ export const loanApplicationForm = Yup.object().shape({
     // .required("status is required (from outter null check)")
 
 })
-

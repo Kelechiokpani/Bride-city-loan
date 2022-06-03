@@ -20,3 +20,13 @@ getCurrentUser {
 }
 }
 `;
+
+export const GET_VERIFICATION_STATUS = gql`
+query GETVERIFICATIONSTATUS {
+  getUserVerificationStatus {
+    emailVerified
+    phoneVerified
+    bvnVerified
+  }
+}
+`;

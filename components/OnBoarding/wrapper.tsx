@@ -1,37 +1,77 @@
-import { FC } from "react";
+import { useQuery } from "@apollo/client";
+import Router from "next/router";
+import { FC, useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
+import { GET_VERIFICATION_STATUS } from "../../graphql/queries";
+import { AccountVerificationProps } from "../../pages/onboarding";
+import BvnVerification from "./bvnVerification";
+import EmailVerification from "./emailVerification";
+import PhoneVerification from "./phoneVerification";
 
-type Props = {
-    children?: JSX.Element | JSX.Element[],
-    currentStep: String,
-    previousStep?: String,
 
+export type VerificationComponentPropTypes = {
+    onVerificationComplete: (step: String) => void
 }
-
 type Stepper = {
     name: String,
     text: String
+    Component: FC<VerificationComponentPropTypes>
 }
 
-const OnBoardingWrapper: FC<Props> = ({ children, currentStep, previousStep }: Props) => {
+const OnBoardingWrapper: FC<AccountVerificationProps> = ({ emailVerified, phoneVerified, bvnVerified  }: AccountVerificationProps) => {
 
+    const [CurrentStep, setCurrentStep] = useState<Stepper>()
 
-    let steps: Stepper[] = [
+        const steps = useMemo<Stepper[]>(() => {
+            return [
         {
-            name: 'email',
-            text: 'Verify Email Address'
+            name: 'Email',
+            text: 'Verify Email Address',
+            Component: EmailVerification,
         }, {
-            name: 'phone',
-            text: 'Verify Phone Number'
+            name: 'Phone',
+            text: 'Verify Phone Number',
+            Component: PhoneVerification
+
         },
         {
-            name: 'bvn',
-            text: 'Verify your Bvn'
-        },
-        {
-            name: 'document',
-            text: 'Upload A Valid Document'
+            name: 'Bvn',
+            text: 'Verify your Bvn',
+            Component: BvnVerification
         },
     ];
+        }, []);
+
+    useEffect(()=> {
+                 if (!emailVerified) {
+                    setCurrentStep(steps[0])
+                } else if (!phoneVerified) {
+                    setCurrentStep(steps[1])
+                } else if (!bvnVerified) {
+                    setCurrentStep(steps[2])
+                }
+    }, [emailVerified, phoneVerified, bvnVerified, steps])
+
+
+    const goToNextStep = (step: string, value: boolean) => {
+     let currentStep =   steps.findIndex((stepper) => stepper.name === step)
+
+        switch (currentStep) {
+            case 0: {
+                setCurrentStep(steps[1])
+                break
+            }
+            case 1: {
+                setCurrentStep(steps[2])
+                break
+            }
+            default: {
+                toast.error("An error has occurred, try again")
+                break
+            }
+        }
+    }
+
 
     return (
         <div className="nk-content nk-content-fluid">
@@ -60,7 +100,7 @@ const OnBoardingWrapper: FC<Props> = ({ children, currentStep, previousStep }: P
                                             <ul className="list list-step">
                                                 {
                                                     steps.map((step, index) => (
-                                                        <li className={step.name === currentStep ? 'list-step-current' : ''} key={index}>{step.text}</li>
+                                                        <li className={step.name === CurrentStep?.name ? 'list-step-current' : ''} key={index}>{step.text}</li>
                                                     ))
                                                 }
 
@@ -85,7 +125,11 @@ const OnBoardingWrapper: FC<Props> = ({ children, currentStep, previousStep }: P
                                 <div className="col-lg-8">
                                     <div className="card-inner card-inner-lg h-100">
                                         <div className="align-center flex-wrap flex-md-nowrap g-3 h-100">
-                                            {children}
+                                            {
+                                                CurrentStep && <>
+                                                <CurrentStep.Component onVerificationComplete={(step) => goToNextStep}/>
+                                                </>
+                                            }
                                         </div>
                                     </div>
                                 </div>

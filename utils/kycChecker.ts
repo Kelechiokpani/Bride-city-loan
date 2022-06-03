@@ -17,14 +17,14 @@ const withKycEnabled = (gssp: any) => {
         }
 
         else {
+            console.log(token)
             let user = JSON.parse(_temp?.valueOf() as string)
 
             let kycStages = {
-                email: user.emailVerified,
-                phone: user.phoneVerified,
-                bvn: user.bvnVerified,
+                email: user.verification.emailVerified,
+                phone: user.verification.phoneVerified,
+                bvn: user.verification.bvnVerified,
             }
-            console.log(kycStages)
             if (kycStages.email && kycStages.phone && kycStages.bvn) {
                 return await gssp(context);
             }
@@ -88,7 +88,7 @@ const withKycEnabled = (gssp: any) => {
             //         };
             // }
 
-            // return await gssp(context);
+            return await gssp(context);
 
         }
     }
