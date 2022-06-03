@@ -5,10 +5,9 @@ import Link from "next/link";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginValidation } from "../../validations";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../graphql/mutations";
 import Router from "next/router";
-import { GET_CURRENT_USER } from "../../graphql/queries";
 
 
 interface UserSubmitForm {
@@ -18,11 +17,7 @@ interface UserSubmitForm {
 }
 
 const LoginPage: NextPage = () => {
-
-    const [loginUser, { loading }] = useMutation<{
-        email: string,
-        password: string
-    }>(LOGIN_USER)
+    const [loginUser, { loading }] = useMutation(LOGIN_USER)
     const {
         register,
         handleSubmit,
@@ -37,14 +32,11 @@ const LoginPage: NextPage = () => {
             variables: {
                 email: data.email,
                 password: data.password,
-            },
-            refetchQueries: [
-                {
-                    query: GET_CURRENT_USER
-                }
-            ]
-        }).then(({ data }) => {
-            console.log(data);
+            }
+        }).then(({data: {loginUser}}) => {
+            if(loginUser === 'login completed') {
+                Router.push('/')
+            }
         });
     };
 

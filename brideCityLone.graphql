@@ -16,6 +16,7 @@ type Address {
     state: String
     street: String
 }
+
 type Mutation {
     _: Boolean
     addUser(data: userInput): String!
@@ -31,6 +32,15 @@ type Mutation {
     userIdentityVerification(number: Int, type: String!): String!
 }
 
+type Profile {
+    address: Address
+    avatar: String
+    firstName: String
+    isBlocked: Boolean
+    lastName: String
+    utilityBill: [String]
+}
+
 type Query {
     _: Boolean
     getCurrentUser: User!
@@ -43,17 +53,17 @@ type Subscription {
 
 type User {
     _id: ID!
-    address: Address
-    avater: String
-    bvnVerified: Boolean
     email: String
-    emailVerified: Boolean
-    firstName: String
-    isBlocked: Boolean
-    lastName: String
     phone: String
+    profile: Profile
+    verification: Verification
+}
+
+type Verification {
+    bvn: String
+    bvnVerified: Boolean
+    emailVerified: Boolean
     phoneVerified: Boolean
-    utilityBill: [String]
 }
 
 enum CacheControlScope {

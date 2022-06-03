@@ -1,29 +1,29 @@
-import { NextPage } from "next";
-import { NextRouter, useRouter } from "next/router";
-import AuthLayout from "../../components/Layouts/auth";
-import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup'
-import { useState } from "react";
-import { codeVerificationValidatoion } from "../../validations";
 import { useMutation } from "@apollo/client";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { NextRouter, useRouter } from "next/router";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { CODE_VERIFICATION } from "../../graphql/mutations";
+import { GET_VERIFICATION_STATUS } from "../../graphql/queries";
+import { codeVerificationValidatoion } from "../../validations";
+import { VerificationComponentPropTypes } from "./wrapper";
 
 
-const EmailOnBoarding: NextPage = () => {
+const EmailVerification: FC<VerificationComponentPropTypes> = ({onVerificationComplete}:VerificationComponentPropTypes) => {
+        const router: NextRouter = useRouter()
 
-    const router: NextRouter = useRouter()
-
-    const [verifyEmail, { loading }] = useMutation<{
-        type: string,
-        code: string,
-    }>(CODE_VERIFICATION)
+    const [verifyEmail, { loading }] = useMutation(CODE_VERIFICATION, {
+        refetchQueries: [
+            {
+                query: GET_VERIFICATION_STATUS
+            }
+        ]
+    })
 
     interface UserSubmitForm {
         code: string;
-    };
-
+    }
 
 
     const {
@@ -40,15 +40,21 @@ const EmailOnBoarding: NextPage = () => {
                 type: 'Email',
                 code: data.code,
             }
-        }).then(({data}) => {
-            router.push('/onboarding/phone');
+        }).then(({data: {codeVerification}}) => {
+            if(codeVerification === 'success') {
+                toast.success('Email verification complete')
+
+                 onVerificationComplete('Email')
+
+            }
+
+        }).catch(err => {
+            toast.error(err.message)
         })
     };
 
     return (
-        <AuthLayout wide={true}>
-            <OnBoardingWrapper currentStep={'email'}>
-                <div className={'col-lg-10'}>
+        <div className={'col-lg-10'}>
                     <form action="" onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
                             <div className="form-control-wrap">
@@ -70,10 +76,7 @@ const EmailOnBoarding: NextPage = () => {
                         </div>
                     </form>
                 </div>
-            </OnBoardingWrapper>
-
-        </AuthLayout>
     )
-}
+};
 
-export default EmailOnBoarding
+export default EmailVerification;

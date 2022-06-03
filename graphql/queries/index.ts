@@ -6,6 +6,27 @@ getCurrentUser {
     _id
     email
     phone
+    verification {
+        emailVerified
+        phoneVerified
+        bvnVerified
+    }
+    profile {
+        firstName
+        lastName
+        avatar
+        isBlocked
+    }
 }
+}
+`;
+
+export const GET_VERIFICATION_STATUS = gql`
+query GETVERIFICATIONSTATUS {
+  getUserVerificationStatus {
+    emailVerified
+    phoneVerified
+    bvnVerified
+  }
 }
 `;

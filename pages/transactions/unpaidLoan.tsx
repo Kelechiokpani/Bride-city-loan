@@ -51,10 +51,4 @@ const UnpadLoan: NextPage = () => {
     )
 }
 
-// export const getServerSideProps = withKycEnabled((ctx: any) => {
-//     return {
-//         props: {}
-//     };
-// });
-
 export default UnpadLoan

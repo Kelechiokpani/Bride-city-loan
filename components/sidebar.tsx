@@ -10,7 +10,8 @@ const Sidebar: FC = () => {
         <div className="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
-                    <a href="/" className="logo-link nk-sidebar-logo" style={{ paddingTop: "10vh" }}>
+                    <Link href={'/'}>
+                        <a className="logo-link nk-sidebar-logo" style={{ paddingTop: "10vh" }}>
                         <Image className="logo-light logo-img" src="/images/logo.png"
                             // srcSet="/images/logo2x.png 2x"
                             alt="logo"
@@ -22,6 +23,7 @@ const Sidebar: FC = () => {
                             height={50} />
                         <span className="nio-version">Bride City</span>
                     </a>
+                    </Link>
                 </div>
                 <div className="nk-menu-trigger me-n2">
                     <a href="#" className="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em
@@ -133,11 +135,11 @@ const Sidebar: FC = () => {
                                         className="icon ni ni-wallet-in"></em></a></li>
                                 </ul>
                                 <ul className="link-list">
-                                    <li><a href=""><em
+                                    <li><a><em
                                         className="icon ni ni-user-alt"></em><span>View Profile</span></a></li>
-                                    <li><a href=""><em
+                                    <li><a><em
                                         className="icon ni ni-setting-alt"></em><span>Account Setting</span></a></li>
-                                    <li><a href=""><em
+                                    <li><a><em
                                         className="icon ni ni-activity-alt"></em><span>Login Activity</span></a></li>
                                 </ul>
                                 <ul className="link-list">
@@ -158,7 +160,7 @@ const Sidebar: FC = () => {
                                 </li> */}
                                 <li className="nk-menu-item">
                                     <Link href="/">
-                                        <a href="" className="nk-menu-link">
+                                        <a className="nk-menu-link">
                                             <span className="nk-menu-icon">
                                                 <em className="icon ni ni-dashboard"> </em>
                                             </span>
@@ -170,7 +172,7 @@ const Sidebar: FC = () => {
 
                                 <li className="nk-menu-item">
                                     <Link href="/account">
-                                        <a href="" className="nk-menu-link">
+                                        <a className="nk-menu-link">
                                             <span className="nk-menu-icon"><em className="icon ni ni-account-setting"></em></span>
                                             <span className="nk-menu-text">My Profile</span>
                                         </a>
@@ -179,7 +181,7 @@ const Sidebar: FC = () => {
 
                                 <li className="nk-menu-item">
                                     <Link href="/onboarding/kyc">
-                                        <a href="" className="nk-menu-link">
+                                        <a className="nk-menu-link">
                                             <span className="nk-menu-icon"><em className="icon ni ni-user-c"></em></span>
                                             <span className="nk-menu-text">KYC</span>
                                         </a>
@@ -188,7 +190,7 @@ const Sidebar: FC = () => {
 
                                 <li className="nk-menu-item">
                                     <Link href="/transactions/unpaidLoan">
-                                        <a href="" className="nk-menu-link">
+                                        <a className="nk-menu-link">
                                             <span className="nk-menu-icon"><em className="icon ni ni-coins"></em></span>
                                             <span className="nk-menu-text">Unpaid Loan</span>
                                         </a>
@@ -196,14 +198,14 @@ const Sidebar: FC = () => {
                                 </li>
                                 <li className="nk-menu-item">
                                     <Link href="/transactions/withdrawal">
-                                        <a href="" className="nk-menu-link">
+                                        <a className="nk-menu-link">
                                             <span className="nk-menu-icon"><em className="icon ni ni-repeat"></em></span>
                                             <span className="nk-menu-text">Withdrawal</span>
                                         </a>
                                     </Link>
                                 </li>  <li className="nk-menu-item">
                                     <Link href="/transactions">
-                                        <a href="" className="nk-menu-link">
+                                        <a className="nk-menu-link">
                                             <span className="nk-menu-icon">  <em
                                                 className="icon ni ni-wallet-alt"></em></span>
                                             <span className="nk-menu-text">Transactions</span>
@@ -211,7 +213,7 @@ const Sidebar: FC = () => {
                                     </Link>
                                 </li>
                                 <li className="nk-menu-item">
-                                    <a href="" className="nk-menu-link">
+                                    <a className="nk-menu-link">
                                         <span className="nk-menu-icon"><em
                                             className="icon ni ni-chat-circle"></em></span>
                                         <span className="nk-menu-text">Customer Support</span>
@@ -225,15 +227,15 @@ const Sidebar: FC = () => {
                                     </a>
                                     <ul className="nk-menu-sub">
                                         <li className="nk-menu-item">
-                                            <a href="" className="nk-menu-link"><span
+                                            <a className="nk-menu-link"><span
                                                 className="nk-menu-text">Welcome</span></a>
                                         </li>
                                         <li className="nk-menu-item">
-                                            <a href="" className="nk-menu-link"><span
+                                            <a className="nk-menu-link"><span
                                                 className="nk-menu-text">KYC - Get Started</span></a>
                                         </li>
                                         <li className="nk-menu-item">
-                                            <a href="" className="nk-menu-link"><span
+                                            <a className="nk-menu-link"><span
                                                 className="nk-menu-text">KYC - Application Form</span></a>
                                         </li>
                                     </ul>
@@ -244,13 +246,13 @@ const Sidebar: FC = () => {
                                     <h6 className="overline-title">Return to</h6>
                                 </li>
                                 <li className="nk-menu-item">
-                                    <a href="" className="nk-menu-link">
+                                    <a className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-dashlite"></em></span>
                                         <span className="nk-menu-text">Main Dashboard</span>
                                     </a>
                                 </li>
                                 <li className="nk-menu-item">
-                                    <a href="" className="nk-menu-link">
+                                    <a className="nk-menu-link">
                                         <span className="nk-menu-icon"><em className="icon ni ni-layers"></em></span>
                                         <span className="nk-menu-text">All Components</span>
                                     </a>

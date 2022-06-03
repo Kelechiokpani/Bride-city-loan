@@ -1,26 +1,27 @@
-import { NextPage } from "next";
-import AuthLayout from "../../components/Layouts/auth";
-import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
-import { useRouter } from "next/router";
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { codeVerificationValidatoion } from "../../validations";
-import { useLazyQuery, useMutation } from "@apollo/client";
-import { CODE_VERIFICATION } from "../../graphql/mutations";
-import { GET_CURRENT_USER } from "../../graphql/queries";
-import { setCookies } from "cookies-next";
+import { useMutation } from "@apollo/client";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-
+import { CODE_VERIFICATION } from "../../graphql/mutations";
+import { GET_VERIFICATION_STATUS } from "../../graphql/queries";
+import { codeVerificationValidatoion } from "../../validations";
+import { VerificationComponentPropTypes } from "./wrapper";
 
 
 interface UserSubmitForm {
     code: string;
 
 }
-const PhoneOnBoarding: NextPage = () => {
-    const router = useRouter()
-    const [verifyPhone, { loading }] = useMutation(CODE_VERIFICATION)
-     const [getCurrentUser] = useLazyQuery(GET_CURRENT_USER);
+
+const PhoneVerification:FC<VerificationComponentPropTypes> = ({onVerificationComplete}: VerificationComponentPropTypes) => {
+    const [verifyPhone, { loading }] = useMutation(CODE_VERIFICATION, {
+        refetchQueries: [
+            {
+                query: GET_VERIFICATION_STATUS
+            }
+        ]
+    })
 
     const {
         handleSubmit,
@@ -38,7 +39,8 @@ const PhoneOnBoarding: NextPage = () => {
             }
         }).then(({data: {codeVerification}}) => {
             if(codeVerification === 'success') {
-               router.push('/onboarding/bvn');
+                toast.success('Phone verification complete')
+               onVerificationComplete('Phone')
             }
         }).catch(err => {
             toast.error(err.message)
@@ -47,9 +49,7 @@ const PhoneOnBoarding: NextPage = () => {
     };
 
     return (
-        <AuthLayout wide={true}>
-            <OnBoardingWrapper currentStep={'phone'}>
-                <div className={'col-lg-10'}>
+        <div className={'col-lg-10'}>
                     <form action="" onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
                             <div className="form-label-group">
@@ -74,10 +74,7 @@ const PhoneOnBoarding: NextPage = () => {
                         </div>
                     </form>
                 </div>
-            </OnBoardingWrapper>
-
-        </AuthLayout>
     )
 }
 
-export default PhoneOnBoarding
+export default PhoneVerification;

@@ -1,26 +1,24 @@
-import { NextPage } from "next";
-import { NextRouter, useRouter } from "next/router";
-import AuthLayout from "../../components/Layouts/auth";
-import OnBoardingWrapper from "../../components/OnBoarding/wrapper";
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import { useMutation } from "@apollo/client";
-import { IDENTITY_VERIFICATION } from "../../graphql/mutations";
-import { identityVerificationValidation } from "../../validations";
-
+import { useMutation } from "@apollo/client"
+import { yupResolver } from "@hookform/resolvers/yup"
+import Router from "next/router"
+import { FC } from "react"
+import { useForm } from "react-hook-form"
+import { toast } from "react-toastify"
+import { IDENTITY_VERIFICATION } from "../../graphql/mutations"
+import { GET_VERIFICATION_STATUS } from "../../graphql/queries"
+import { identityVerificationValidation } from "../../validations"
+import { VerificationComponentPropTypes } from "./wrapper"
 
 
 interface UserSubmitForm {
     number: string;
 
 }
-const BvnOnBoarding: NextPage = () => {
-    const router: NextRouter = useRouter()
-    const [verifyBvn, { loading }] = useMutation<{
-        type: string,
-        code: string,
-    }>(IDENTITY_VERIFICATION)
+
+const BvnVerification: FC<VerificationComponentPropTypes> = ({onVerificationComplete}: VerificationComponentPropTypes) => {
+    const [verifyBvn, { loading }] = useMutation(IDENTITY_VERIFICATION, {
+
+    })
 
 
     const {
@@ -35,18 +33,18 @@ const BvnOnBoarding: NextPage = () => {
        verifyBvn({
             variables: {
                 type: 'BVN',
-                code: data.number,
+                number: parseInt(data.number),
             }
-        }).then(({data}) => {
-            router.push('/onboarding/kyc');
+        }).then(_ => {
+            toast.success('Bvn Verification complete');
+            Router.push('/account/setup')
+        }).catch(err => {
+            toast.error(err.message)
         })
 
     };
-
     return (
-        <AuthLayout wide={true}>
-            <OnBoardingWrapper currentStep={'bvn'}>
-                <div className={'col-lg-10'}>
+        <div className={'col-lg-10'}>
                     <form action="" onSubmit={handleSubmit(onSubmit)}>
                         <div className="form-group">
                             <div className="form-label-group">
@@ -58,6 +56,7 @@ const BvnOnBoarding: NextPage = () => {
                                     {...register('number')}
                                     className={`form-control form-control-lg ${errors.number ? 'is-invalid' : ''}`}
                                     id="number"
+
                                     placeholder="Enter a Valid Bvn "
                                 />
                                 <div className="invalid-feedback">{errors.number?.message}</div>
@@ -66,16 +65,14 @@ const BvnOnBoarding: NextPage = () => {
                         </div>
                         <div className="form-group">
 
-                            <button className="btn btn-lg btn-primary btn-block">Verify BVN
+                            <button className="btn btn-lg btn-primary btn-block" disabled={loading}>
+                                Verify BVN
                             </button>
 
                         </div>
                     </form>
                 </div>
-            </OnBoardingWrapper>
-
-        </AuthLayout>
     )
 }
 
-export default BvnOnBoarding
+export default BvnVerification

@@ -52,7 +52,7 @@ const RegisterPage: NextPage = () => {
 
             // use toast alert
 
-            router.push('/onboarding/email')
+            router.push('/onboarding')
 
         });
     }

@@ -61,7 +61,7 @@ const LoanCategory: NextPage = () => {
 
     }
 
-  
+
 
 
 
@@ -245,10 +245,5 @@ const LoanCategory: NextPage = () => {
     )
 }
 
-// export const getServerSideProps = withKycEnabled((ctx: any) => {
-//     return {
-//         props: {}
-//     };
-// });
 
 export default LoanCategory

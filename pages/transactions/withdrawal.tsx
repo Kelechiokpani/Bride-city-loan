@@ -50,11 +50,4 @@ const Withdrawal: NextPage = () => {
         </DashboardLayout>
     )
 }
-
-// export const getServerSideProps = withKycEnabled((ctx: any) => {
-//     return {
-//         props: {}
-//     };
-// });
-
 export default Withdrawal
