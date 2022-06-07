@@ -24,7 +24,8 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <title>Bride City Loan</title>
             </Head>
             <link rel="stylesheet" href="/assets/css/dashlite.css?ver=3.0.2" />
-            <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css?ver=3.0.2" />
+            <link id="skin-default" rel="stylesheet" href="/assets/css/theme.css" />
+            <link id="skin-default" rel="stylesheet" href="/assets/css/skins/theme-purple.css" />
 
             <ToastContainer/>
             <ApolloProvider client={apolloClient}>

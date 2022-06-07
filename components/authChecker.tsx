@@ -13,7 +13,12 @@ const AuthChecker: FC<Props> = ({children}: Props) => {
 
     useEffect(() => {
         if(data && data.getCurrentUser) {
-            setAuthorized(true)
+            if(!data.getCurrentUser.profile) {
+                Router.push("/onboarding")
+            }
+            else {
+                setAuthorized(true)
+            }
         }
         else {
             if(error) {

@@ -1,8 +1,28 @@
-import { FC } from "react";
+import { useMutation, useQuery } from "@apollo/client";
+import Link from "next/link";
+import Router from "next/router";
+import { FC, useEffect, useState } from "react";
+import { LOGOUT } from "../graphql/mutations";
+import { GET_CURRENT_USER } from "../graphql/queries";
+import { User } from "../graphql/types";
 import Logo from "./logo";
 
 
 const Header: FC = () => {
+     const { data } = useQuery(GET_CURRENT_USER);
+     const [logout] = useMutation(LOGOUT);
+     const [user, setUser] = useState<User>();
+
+     useEffect(() => {
+            if(data && data.getCurrentUser) {
+                setUser(data.getCurrentUser as User);
+            }
+     }, [data]);
+
+     const signOut= () => {
+            logout().finally(() => Router.push("/auth/login"));
+
+     }
     return (
         <>
             {/*main header @s*/}
@@ -15,7 +35,7 @@ const Header: FC = () => {
                                 <em className="icon ni ni-menu"></em>
                             </a>
                         </div>
-                        
+
                             <div className="nk-header-brand d-xl-none">
                                 <Logo />
                             </div>
@@ -43,7 +63,7 @@ const Header: FC = () => {
                                                 </div>
                                                 <div className="user-info d-none d-md-block">
                                                     <div className="user-status user-status-unverified">Unverified</div>
-                                                    <div className="user-name dropdown-indicator">John Doe</div>
+                                                    <div className="user-name dropdown-indicator capitalize">{user?.profile?.firstName + ' ' + user?.profile?.lastName}</div>
                                                 </div>
                                             </div>
                                         </a>
@@ -54,39 +74,54 @@ const Header: FC = () => {
                                                         <span>AB</span>
                                                     </div>
                                                     <div className="user-info">
-                                                        <span className="lead-text">John Doe</span>
-                                                        <span className="sub-text">email@example.com</span>
+                                                        <span className="lead-text capitalize">{user?.profile?.firstName + ' ' + user?.profile?.lastName}</span>
+                                                        <span className="sub-text">{user?.email}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="dropdown-inner user-account-info">
-                                                <h6 className="overline-title-alt">Nio Wallet Account</h6>
-                                                <div className="user-balance">12.395769 <small
-                                                    className="currency currency-btc">BTC</small></div>
-                                                <div className="user-balance-sub">Locked <span>0.344939 <span
-                                                    className="currency currency-btc">BTC</span></span></div>
+                                                <h6 className="overline-title-alt">Account Balance</h6>
+                                                <div className="user-balance">100,000 <small
+                                                    className="currency currency-btc">NGN</small></div>
+
                                                 <a href="#" className="link"><span>Withdraw Funds</span> <em
                                                     className="icon ni ni-wallet-out"></em></a>
                                             </div>
                                             <div className="dropdown-inner">
                                                 <ul className="link-list">
-                                                    <li><a href=""><em
-                                                        className="icon ni ni-user-alt"></em><span>View Profile</span></a>
+                                                    <li>
+                                                        <Link href={'/account'}>
+                                                            <a>
+                                                                <em className="icon ni ni-user-alt"></em>
+                                                                <span>View Profile</span>
+                                                            </a>
+                                                        </Link>
                                                     </li>
-                                                    <li><a href=""><em
-                                                        className="icon ni ni-setting-alt"></em><span>Account Setting</span></a>
+                                                    <li>
+                                                        <Link href={'/account/security'}>
+                                                            <a>
+                                                                 <em className="icon ni ni-setting-alt"></em><span>Account Security</span>
+                                                            </a>
+                                                        </Link>
                                                     </li>
-                                                    <li><a href=""><em
-                                                        className="icon ni ni-activity-alt"></em><span>Login Activity</span></a>
+                                                    <li>
+                                                        <Link href={'/account/activity'}>
+                                                            <a>
+                                                                <em  className="icon ni ni-activity-alt"></em>
+                                                                <span>Login Activity</span>
+                                                            </a>
+                                                        </Link>
                                                     </li>
-                                                    <li><a className="dark-switch" href="#"><em
-                                                        className="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
                                                 </ul>
                                             </div>
                                             <div className="dropdown-inner">
                                                 <ul className="link-list">
-                                                    <li><a href="#"><em
-                                                        className="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                                    <li>
+                                                        <a className="pointer" onClick={signOut}>
+                                                            <em className="icon ni ni-signout"></em>
+                                                            <span>Sign out</span>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
