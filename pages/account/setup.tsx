@@ -1,12 +1,14 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import AuthChecker from "../../components/authChecker";
 import AuthLayout from "../../components/Layouts/auth";
 import { CREATE_PROFILE } from "../../graphql/mutations";
+import { STATES_AND_CITIES } from "../../graphql/queries";
 import { accountSetupFormValidation } from "../../validations";
 
 interface AccountSetupSubmitForm {
@@ -21,7 +23,16 @@ interface AccountSetupSubmitForm {
 const AccountSetup: NextPage = () => {
    const router = useRouter()
 
+   const {data} = useQuery(STATES_AND_CITIES)
    const [createProfile, { loading }] = useMutation(CREATE_PROFILE);
+//    const [currentState, setCurrentState] = useState([])
+   const [cities, setCities] = useState([])
+
+//    useEffect(() => {
+//        if(data && data.getStateAndCities) {
+//            setCurrentState(data.getStateAndCities)
+//        }
+//    }, [data])
 
        const {
         register,
@@ -32,8 +43,15 @@ const AccountSetup: NextPage = () => {
         resolver: yupResolver(accountSetupFormValidation)
     });
 
-    const sub = () => {
-        console.log('submitted')
+    const handleStateChange = (e: any) => {
+        e.preventDefault()
+
+        console.log(e.target.value)
+
+       let selectedState = data?.getStateAndCities?.find((item: any) => item.state.name === e.target.value)
+       if(selectedState) {
+           setCities(selectedState.cities);
+       }
     }
 
     const onSubmit = (data: AccountSetupSubmitForm) => {
@@ -162,6 +180,29 @@ const AccountSetup: NextPage = () => {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                     <div className="col-md-6">
+                                                        <div className="form-group">
+                                                            <div className="form-label-group">
+                                                                <label className="form-label">State <span
+                                                                    className="text-danger">*</span></label>
+                                                            </div>
+                                                            <div className="form-control-group">
+                                                                   <select
+                                                                    defaultValue={'--Select State--'}
+                                                                    {...register('state')}
+                                                                    className={`form-control form-control-lg  ${errors.state ? 'is-invalid' : ''}`}
+                                                                    onChange={handleStateChange}>
+                                                                    <option selected value={'--Select State--'}>--Select State--</option>
+                                                                    {
+                                                                        data?.getStateAndCities?.map((value:any, index: any) =>
+                                                                            <option value={value.state.name} key={index}>{value.state.name}</option>
+                                                                        )
+                                                                    }
+                                                                </select>
+                                                                <div className="invalid-feedback">{errors.state?.message}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                     <div className="col-md-6">
                                                         <div className="form-group">
@@ -170,25 +211,18 @@ const AccountSetup: NextPage = () => {
                                                                     className="text-danger">*</span></label>
                                                             </div>
                                                             <div className="form-control-group">
-                                                                <input type="text"
-                                                                    {...register('city')}
-                                                                    className={`form-control form-control-lg ${errors.city ? 'is-invalid' : ''}`} />
+                                                                       <select
+                                                                        className={`form-control form-control-lg  ${errors.city ? 'is-invalid' : ''}`}
+                                                                        defaultValue={'--Select City--'}
+                                                                         {...register('city')}>
+                                                                            <option selected value={'--Select City--'}>--Select City--</option>
+                                                                            {
+                                                                                cities?.map((value:any, index: any) =>
+                                                                                    <option value={value} key={index}>{value}</option>
+                                                                                )
+                                                                            }
+                                                                        </select>
                                                                 <div className="invalid-feedback">{errors.city?.message}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <div className="form-label-group">
-                                                                <label className="form-label">State <span
-                                                                    className="text-danger">*</span></label>
-                                                            </div>
-                                                            <div className="form-control-group">
-                                                                <input type="text"
-                                                                    {...register('state')}
-                                                                    className={`form-control form-control-lg ${errors.state ? 'is-invalid' : ''}`} />
-                                                                <div className="invalid-feedback">{errors.state?.message}</div>
                                                             </div>
                                                         </div>
                                                     </div>

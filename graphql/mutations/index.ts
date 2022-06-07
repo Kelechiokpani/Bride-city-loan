@@ -47,30 +47,13 @@ mutation UpdatePerson($data: updatePersonInput!) {
 // personal Form---------------
 export const LOAN_APPLICATION = gql`
 mutation  LoanApplication(
-    $firstname: String!
-    $lastname: String!
-    $email: String!
-    $address:string!
-    $number: String!
-    $date: string!
-    $lga: string!
-    $city: string!
-    $nationality: string!
+    $category: String!
+    $applicationAmount: Int!
     ) {
-    loanApplication(
-        firstname: $firstname
-        lastname: $lastname
-        email: $email
-        address: $string
-        number: $number
-        dateofbirth: $string
-        lga: $string
-        address:$string
-        state: $string
-        nationality: $string
-
+    applyLoan(
+        category: $category
+        applicationAmount: $applicationAmount
         )
 }
-
 `
 // Guarantor's Form
