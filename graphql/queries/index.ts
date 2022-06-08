@@ -55,3 +55,12 @@ query GetLoanCategories {
   }
 }
 `;
+
+
+export const GET_EDITDETAILS  = gql `
+query GetEditDetails {
+  id
+  text
+}
+
+`
