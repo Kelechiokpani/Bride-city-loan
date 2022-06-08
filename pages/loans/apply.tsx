@@ -10,7 +10,6 @@ import {LOAN_APPLICATION} from "../../graphql/mutations";
 
 
 
-
 interface UserSubmitForm {
     loanCategory: string;
     amount: string;

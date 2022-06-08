@@ -51,11 +51,11 @@ const AdminSidebar: FC = () => {
                     </Link>
                   </li>
                   <li className="nk-menu-item">
-                    <Link href="/admin/applicationlog">
+                    <Link href="/admin/attendantlog">
                       <a href="" className="nk-menu-link">
                         <span className="nk-menu-icon"><em
                           className="icon ni ni-wallet-alt"></em></span>
-                        <span className="nk-menu-text">Loan Appliction Log</span>
+                        <span className="nk-menu-text">Attendant Log</span>
                       </a>
 
                     </Link>
@@ -64,7 +64,7 @@ const AdminSidebar: FC = () => {
                     <Link href="/admin/applicationlist">
                       <a href="" className="nk-menu-link">
                         <span className="nk-menu-icon"><em className="icon ni ni-coins"></em></span>
-                        <span className="nk-menu-text">Applications</span>
+                        <span className="nk-menu-text">Loan Applications</span>
                       </a>
                     </Link>
                   </li>

@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import AdminLayout from "../../components/Layouts/admin";
-
-import ApplicationLog from "../../components/ApplicationLog";
+import AttendantLog from "../../components/AttendantLog";
 
 const AdminApplicationLog: NextPage = () => {
   return (
@@ -12,9 +11,9 @@ const AdminApplicationLog: NextPage = () => {
             <div className="nk-block-head nk-block-head-sm">
               <div className="nk-block-between g-3">
                 <div className="nk-block-head-content">
-                  <h3 className="nk-block-title page-title">Loan Application Log</h3>
+                  <h3 className="nk-block-title page-title">Loan Attendant Log</h3>
                   <div className="nk-block-des text-soft">
-                    <p>You have a total of 20 Application Log</p>
+                    <p>You have a total  40 Application Log</p>
                   </div>
                 </div>
 
@@ -40,7 +39,7 @@ const AdminApplicationLog: NextPage = () => {
 
             </div>
 
-            <ApplicationLog />
+            <AttendantLog />
 
           </div>
         </div>

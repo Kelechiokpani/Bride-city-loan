@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 
-const ApplicationLog: FC = () => {
+const AttendantLog: FC = () => {
     return (
         <div className="nk-block">
             <div className="card card-bordered card-stretch">
@@ -9,7 +9,7 @@ const ApplicationLog: FC = () => {
                     <div className="card-inner">
                         <div className="card-title-group">
                             <div className="card-title">
-                                <h5 className="title">Loan Application Log</h5>
+                                <h5 className="title">Attendant Log</h5>
                             </div>
                             <div className="card-tools me-n1">
                                 <ul className="btn-toolbar">
@@ -78,18 +78,19 @@ const ApplicationLog: FC = () => {
                                     <th className="tb-tnx-id"><span className="">User Id</span></th>
                                     <th className="tb-tnx-info">
                                         <span className="tb-tnx-desc d-none d-sm-inline-block">
-                                            <span>Application detail</span>
+                                            <span>Attendant Name</span>
                                         </span>
                                         <span className="tb-tnx-date d-md-inline-block d-none">
                                             <span className="d-md-none">Date</span>
                                             <span className="d-none d-md-block">
-                                                <span>Date</span>
+                                                <span>Assinged Date</span>
+                                                <span>Customer Name</span>
 
                                             </span>
                                         </span>
                                     </th>
                                     <th className="tb-tnx-amount is-alt">
-                                        <span className="tb-tnx-total">Total</span>
+                                        <span className="tb-tnx-total">Loan Category</span>
                                         <span className="tb-tnx-status d-none d-md-inline-block">Status</span>
                                     </th>
                                     <th className="tb-tnx-action">
@@ -101,20 +102,21 @@ const ApplicationLog: FC = () => {
                             <tbody>
                                 <tr className="tb-tnx-item">
                                     <td className="tb-tnx-id">
-                                        <a href="#"><span>4947</span></a>
+                                        <a href="#"><span>1002</span></a>
                                     </td>
                                     <td className="tb-tnx-info">
                                         <div className="tb-tnx-desc">
-                                            <span className="title">Enterprize Year Subscrition</span>
+                                            <span className="title">Jude Nduka</span>
                                         </div>
                                         <div className="tb-tnx-date">
-                                            <span className="date">10-05-2019</span>
+                                            <span className="date">10-05-2020</span>
+                                            <span className="date">Abel kaleb</span>
 
                                         </div>
                                     </td>
                                     <td className="tb-tnx-amount is-alt">
                                         <div className="tb-tnx-total">
-                                            <span className="amount">$599.00</span>
+                                            <span className="amount">Gold</span>
                                         </div>
                                         <div className="tb-tnx-status">
                                             <span className="badge badge-dot bg-warning">Due</span>
@@ -137,23 +139,24 @@ const ApplicationLog: FC = () => {
                                 </tr>
                                 <tr className="tb-tnx-item">
                                     <td className="tb-tnx-id">
-                                        <a href="#"><span>4904</span></a>
+                                        <a href="#"><span>1008</span></a>
                                     </td>
                                     <td className="tb-tnx-info">
                                         <div className="tb-tnx-desc">
-                                            <span className="title">Maintenance Year Subscription</span>
+                                            <span className="title">judith Emeka</span>
                                         </div>
                                         <div className="tb-tnx-date">
                                             <span className="date">06-19-2019</span>
+                                            <span className="date">Sixtus Okafor</span>
 
                                         </div>
                                     </td>
                                     <td className="tb-tnx-amount is-alt">
                                         <div className="tb-tnx-total">
-                                            <span className="amount">$99.00</span>
+                                            <span className="amount">Basic</span>
                                         </div>
                                         <div className="tb-tnx-status"><span
-                                            className="badge badge-dot bg-success">Paid</span></div>
+                                            className="badge badge-dot bg-light">unassigned</span></div>
                                     </td>
                                     <td className="tb-tnx-action">
                                         <div className="dropdown">
@@ -173,23 +176,60 @@ const ApplicationLog: FC = () => {
 
                                 <tr className="tb-tnx-item">
                                     <td className="tb-tnx-id">
-                                        <a href="#"><span>4829</span></a>
+                                        <a href="#"><span>1004</span></a>
                                     </td>
                                     <td className="tb-tnx-info">
                                         <div className="tb-tnx-desc">
-                                            <span className="title">Enterprize Year Subscrition</span>
+                                            <span className="title">Bright Eze</span>
                                         </div>
                                         <div className="tb-tnx-date">
                                             <span className="date">10-04-2018</span>
+                                            <span className="date">Okafor Princewill</span>
 
                                         </div>
                                     </td>
                                     <td className="tb-tnx-amount is-alt">
                                         <div className="tb-tnx-total">
-                                            <span className="amount">$599.00</span>
+                                            <span className="amount">Silver</span>
                                         </div>
                                         <div className="tb-tnx-status"><span
-                                            className="badge badge-dot bg-success">Paid</span></div>
+                                            className="badge badge-dot bg-warning">pending</span></div>
+                                    </td>
+                                    <td className="tb-tnx-action">
+                                        <div className="dropdown">
+                                            <a className="text-soft dropdown-toggle btn btn-icon btn-trigger"
+                                                data-bs-toggle="dropdown"><em
+                                                    className="icon ni ni-more-h"></em></a>
+                                            <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
+                                                <ul className="link-list-plain">
+                                                    <li><a href="#">View</a></li>
+                                                    <li><a href="#">Edit</a></li>
+                                                    <li><a href="#">Remove</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr className="tb-tnx-item">
+                                    <td className="tb-tnx-id">
+                                        <a href="#"><span>1008</span></a>
+                                    </td>
+                                    <td className="tb-tnx-info">
+                                        <div className="tb-tnx-desc">
+                                            <span className="title">judith Emeka</span>
+                                        </div>
+                                        <div className="tb-tnx-date">
+                                            <span className="date">06-19-2019</span>
+                                            <span className="date">Sixtus Okafor</span>
+
+                                        </div>
+                                    </td>
+                                    <td className="tb-tnx-amount is-alt">
+                                        <div className="tb-tnx-total">
+                                            <span className="amount">Basic</span>
+                                        </div>
+                                        <div className="tb-tnx-status"><span
+                                            className="badge badge-dot bg-light">unassigned</span></div>
                                     </td>
                                     <td className="tb-tnx-action">
                                         <div className="dropdown">
@@ -235,4 +275,4 @@ const ApplicationLog: FC = () => {
     )
 }
 
-export default ApplicationLog
+export default AttendantLog
