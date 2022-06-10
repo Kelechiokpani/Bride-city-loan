@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import Link from 'next/link';
-import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
-import TransactionsList from "../components/AttendantLog";
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../graphql/queries';
 import { useEffect, useState } from 'react';
 import { User } from '../graphql/types';
+import {toCurrency} from "../utils/formatter";
+import ApplicationLog from "../components/userlogs/ApplicationLog";
 const Home: NextPage = () => {
     const { data: currentUser, loading: loadingCurrentUser } = useQuery(GET_CURRENT_USER);
 
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
                                                     <div className="nk-wg7">
                                                         <div className="nk-wg7-stats">
                                                             <div className="nk-wg7-title">Available balance in USD</div>
-                                                            <div className="number-lg amount">179,850.950</div>
+                                                            <div className="number-lg amount">{toCurrency(179850.950)}</div>
                                                         </div>
                                                         <div className="nk-wg7-stats-group">
                                                             <div className="nk-wg7-stats w-50">
@@ -132,20 +132,20 @@ const Home: NextPage = () => {
                                                             </div>
                                                         </div>
                                                         <div className="card-amount">
-                                                            <span className="amount"> 2000</span>
+                                                            <span className="amount"> {toCurrency(2000)}</span>
                                                         </div>
                                                         <div className="invest-data">
                                                             <div className="invest-data-amount g-2">
                                                                 <div className="invest-data-history">
                                                                     <div className="title">This Month</div>
                                                                     <div
-                                                                        className="amount">40
+                                                                        className="amount">{toCurrency(40)}
                                                                     </div>
                                                                 </div>
                                                                 <div className="invest-data-history">
                                                                     <div className="title">This Week</div>
                                                                     <div
-                                                                        className="amount">3,000
+                                                                        className="amount">{toCurrency(3000)}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -182,13 +182,13 @@ const Home: NextPage = () => {
                                                                 <div className="invest-data-history">
                                                                     <div className="title">This Month</div>
                                                                     <div
-                                                                        className="amount">10,000
+                                                                        className="amount">{toCurrency(10000)}
                                                                     </div>
                                                                 </div>
                                                                 <div className="invest-data-history">
                                                                     <div className="title">This Week</div>
                                                                     <div
-                                                                        className="amount">12,000
+                                                                        className="amount">{toCurrency(12000)}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -210,7 +210,7 @@ const Home: NextPage = () => {
 
                         </div>
                         {/* Transactions Here */}
-                        <TransactionsList />
+                       <ApplicationLog/>
                         <div className="nk-block">
                             <div className="card card-bordered">
                                 <div className="nk-refwg">

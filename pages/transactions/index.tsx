@@ -1,10 +1,10 @@
 import { NextPage } from "next";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import TransactionsList from "../../components/userlogs/ApplicationLog"
-import withKycEnabled from "../../utils/kycChecker";
 
 
 const Transactions: NextPage = () => {
+
     return (
         <DashboardLayout>
             <div className="nk-content nk-content-fluid">
@@ -19,29 +19,11 @@ const Transactions: NextPage = () => {
                                     </div>
                                 </div>
 
-                                <div className="nk-block-head-content">
-                                    <ul className="nk-block-tools g-3">
-                                        <li>
-                                            <div className="drodown">
-                                                <a href="#" className="dropdown-toggle btn btn-icon btn-primary"
-                                                    data-bs-toggle="dropdown"><em className="icon ni ni-plus"></em></a>
-                                                <div className="dropdown-menu dropdown-menu-end">
-                                                    <ul className="link-list-opt no-bdr">
-                                                        <li><a href="#"><span>Add User</span></a></li>
-                                                        <li><a href="#"><span>Add Team</span></a></li>
-                                                        <li><a href="#"><span>Import User</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
                             </div>
 
                         </div>
 
-                        <TransactionsList />
+                        <TransactionsList  />
 
                     </div>
                 </div>

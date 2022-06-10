@@ -3,10 +3,12 @@ import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../../components/Layouts/dashboard";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { loanApplicationForm } from "../../validations/index";
+import { loanApplicationForm } from "../../validations";
 import {useMutation, useQuery} from "@apollo/client";
 import { GET_LOAN_CATEGORIES } from "../../graphql/queries";
 import {LOAN_APPLICATION} from "../../graphql/mutations";
+import {useState} from "react";
+import { toast } from "react-toastify";
 
 
 
@@ -17,8 +19,9 @@ interface UserSubmitForm {
 
 const LoanApplication: NextPage = () => {
     const router: NextRouter = useRouter()
+    const [loanCategory, setLoanCategory] = useState<any>({})
     const { data } = useQuery(GET_LOAN_CATEGORIES)
-    const [applyForLoan] = useMutation(LOAN_APPLICATION)
+    const [applyForLoan, { loading }] = useMutation(LOAN_APPLICATION)
 
 
     const {
@@ -30,11 +33,27 @@ const LoanApplication: NextPage = () => {
         resolver: yupResolver(loanApplicationForm)
     });
 
+    const handleLoanCategorySelection = (e: any) => {
+        e.preventDefault()
+        let selectedCategory = data?.getLoanCategories?.find((category: any) => category.name === e.target.value)
+
+        setLoanCategory(selectedCategory)
+        console.log(selectedCategory)
+    }
+
     const onSubmit = (data: UserSubmitForm) => {
+        console.log(loanCategory, data.amount)
        applyForLoan({
            variables: {
-               category: dat               applicationAmout
-               a.loanCategory,
+               category: loanCategory['_id'],
+               applicationAmount: parseInt(data.amount)
+           }
+       }).then(({data}) => {
+           if(data?.applyLoan && data.applyLoan === 'application submitted') {
+               toast.success("Your loan application has been received and is being processed")
+           }
+           else {
+               toast.error("Error applying for loan")
            }
        })
     };
@@ -94,6 +113,7 @@ const LoanApplication: NextPage = () => {
 
                                                                     defaultValue={'--Select Loan Category--'}
                                                                     {...register('loanCategory')}
+                                                                    onChange={handleLoanCategorySelection}
                                                                     className={`form-control form-control-lg  ${errors.loanCategory ? 'is-invalid' : ''}`}
                                                                     // onChange={handleTypeChange}
                                                                  >
@@ -120,7 +140,9 @@ const LoanApplication: NextPage = () => {
                                                                     className="text-danger">*</span></label>
                                                             </div>
                                                             <div className="form-control-group">
-                                                                <input type="text"
+                                                                <input
+                                                                    {...register('amount', {max: loanCategory['amount']})}
+                                                                    type="text"
                                                                     className="form-control form-control-lg date-picker-alt" />
                                                                 {/* <DatePicker
                                                                     selected={startDate}
@@ -134,9 +156,13 @@ const LoanApplication: NextPage = () => {
 
                                             </div>
 
-                                            <button className="btn btn-lg">
-                                                Next
-                                            </button>
+                                            <div className="col-md-6">
+                                                <div className="form-group m-4">
+                                                    <button type={'submit'} className="btn btn-primary btn-lg" disabled={loading}>
+                                                        Send Application
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </form>
 
                                     </div>
