@@ -6,6 +6,7 @@ import { LOGOUT } from "../graphql/mutations";
 import { GET_CURRENT_USER } from "../graphql/queries";
 import { User } from "../graphql/types";
 import Logo from "./logo";
+import {toCurrency} from "../utils/formatter";
 
 
 const Header: FC = () => {
@@ -81,8 +82,7 @@ const Header: FC = () => {
                                             </div>
                                             <div className="dropdown-inner user-account-info">
                                                 <h6 className="overline-title-alt">Account Balance</h6>
-                                                <div className="user-balance">100,000 <small
-                                                    className="currency currency-btc">NGN</small></div>
+                                                <div className="user-balance">{toCurrency(100000)} </div>
 
                                                 <a href="#" className="link"><span>Withdraw Funds</span> <em
                                                     className="icon ni ni-wallet-out"></em></a>

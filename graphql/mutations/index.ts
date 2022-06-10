@@ -47,12 +47,14 @@ mutation UpdatePerson($data: updatePersonInput!) {
 // personal Form---------------
 export const LOAN_APPLICATION = gql`
 mutation  LoanApplication(
-    $category: String!
+    $category: ID!
     $applicationAmount: Int!
     ) {
     applyLoan(
+    data: {
         category: $category
         applicationAmount: $applicationAmount
+    }
         )
 }
 `
