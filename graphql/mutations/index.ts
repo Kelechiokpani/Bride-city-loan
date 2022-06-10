@@ -58,4 +58,12 @@ mutation  LoanApplication(
         )
 }
 `
-// Guarantor's Form
+// Edit modal
+export const EDIT_USERDETAILS =gql`
+    mutation EditUserDetail($id : string $text : string){
+        editUserDetail(id: $id text: $text){
+        id
+        text
+        }
+    }
+`

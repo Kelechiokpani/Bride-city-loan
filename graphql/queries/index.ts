@@ -86,3 +86,12 @@ export const LOAN_APPLICATIONS = gql`
 
     }
 `;
+
+
+export const GET_EDITDETAILS  = gql `
+query GetEditDetails {
+  id
+  text
+}
+
+`

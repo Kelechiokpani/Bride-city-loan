@@ -33,8 +33,8 @@ const LoginPage: NextPage = () => {
                 email: data.email,
                 password: data.password,
             }
-        }).then(({data: {loginUser}}) => {
-            if(loginUser === 'login completed') {
+        }).then(({ data: { loginUser } }) => {
+            if (loginUser === 'login completed') {
                 Router.push('/')
             }
         });

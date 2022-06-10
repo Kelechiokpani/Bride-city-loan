@@ -75,6 +75,7 @@ export const accountSetupFormValidation = Yup.object().shape({
 });
 
 
+
 // Loan Application
 export const loanApplicationForm = Yup.object().shape({
     loanCategory: Yup.string()
@@ -84,4 +85,22 @@ export const loanApplicationForm = Yup.object().shape({
 
 
 
+})
+
+export const  AdminEditmodal =Yup.object().shape({
+    approvalamount: Yup.number()
+    .positive("Approval amount can't start with a minus")
+    .integer("Approval Amount can't include a decimal point")
+    .required('Approval Amount number is required'),
+
+    // approvalstatus: Yup.string()
+    // .required('Approval status is required'),
+    selectapprovalstatus: Yup.string()
+    .required(" Approval status is required (from label)"),
+    
+    paybackstatus: Yup.string()
+    .required('PayBack status is required'),
+
+    date: Yup.string()
+    .required('Loan Expiration Date is required'),
 })

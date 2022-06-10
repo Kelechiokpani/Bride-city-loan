@@ -12,7 +12,6 @@ import { toast } from "react-toastify";
 
 
 
-
 interface UserSubmitForm {
     loanCategory: string;
     amount: string;
