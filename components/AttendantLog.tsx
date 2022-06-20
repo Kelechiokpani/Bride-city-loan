@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Link from "next/link";
 
 
 const AttendantLog: FC = () => {
@@ -129,7 +130,12 @@ const AttendantLog: FC = () => {
                                                     className="icon ni ni-more-h"></em></a>
                                             <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                 <ul className="link-list-plain">
-                                                    <li><a href="#">View</a></li>
+
+                                                    <li>
+                                                        <Link href={'/admin/attendant'}>
+                                                            <a>View</a>
+                                                        </Link>
+                                                    </li>
                                                     <li><a href="#">Edit</a></li>
                                                     <li><a href="#">Remove</a></li>
                                                 </ul>
@@ -165,6 +171,7 @@ const AttendantLog: FC = () => {
                                                     className="icon ni ni-more-h"></em></a>
                                             <div className="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                                 <ul className="link-list-plain">
+
                                                     <li><a href="#">View</a></li>
                                                     <li><a href="#">Edit</a></li>
                                                     <li><a href="#">Remove</a></li>

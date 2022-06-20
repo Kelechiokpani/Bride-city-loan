@@ -186,7 +186,8 @@ const AdminUsers: NextPage = () => {
                                                     </td>
                                                     <td className="tb-tnx-amount is-alt">
                                                         <div className="tb-tnx-total">
-                                                            <span className="amount">200,000</span>
+                                                            <span className="amount">
+                                                                200,000</span>
                                                         </div>
                                                         <div className="tb-tnx-status">
                                                             <span className="badge badge-dot bg-warning">Due</span>
