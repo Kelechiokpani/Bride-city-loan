@@ -21,20 +21,20 @@ interface AccountSetupSubmitForm {
 }
 
 const AccountSetup: NextPage = () => {
-   const router = useRouter()
+    const router = useRouter()
 
-   const {data} = useQuery(STATES_AND_CITIES)
-   const [createProfile, { loading }] = useMutation(CREATE_PROFILE);
-//    const [currentState, setCurrentState] = useState([])
-   const [cities, setCities] = useState([])
+    const { data } = useQuery(STATES_AND_CITIES)
+    const [createProfile, { loading }] = useMutation(CREATE_PROFILE);
+    //    const [currentState, setCurrentState] = useState([])
+    const [cities, setCities] = useState([])
 
-//    useEffect(() => {
-//        if(data && data.getStateAndCities) {
-//            setCurrentState(data.getStateAndCities)
-//        }
-//    }, [data])
+    //    useEffect(() => {
+    //        if(data && data.getStateAndCities) {
+    //            setCurrentState(data.getStateAndCities)
+    //        }
+    //    }, [data])
 
-       const {
+    const {
         register,
         handleSubmit,
         reset,
@@ -48,10 +48,10 @@ const AccountSetup: NextPage = () => {
 
         console.log(e.target.value)
 
-       let selectedState = data?.getStateAndCities?.find((item: any) => item.state.name === e.target.value)
-       if(selectedState) {
-           setCities(selectedState.cities);
-       }
+        let selectedState = data?.getStateAndCities?.find((item: any) => item.state.name === e.target.value)
+        if (selectedState) {
+            setCities(selectedState.cities);
+        }
     }
 
     const onSubmit = (data: AccountSetupSubmitForm) => {
@@ -67,7 +67,7 @@ const AccountSetup: NextPage = () => {
                     }
                 }
             }
-        }).then(({data}) =>{
+        }).then(({ data }) => {
             toast.success('Profile setup complete');
             router.push('/')
         }).catch(error => {
@@ -77,178 +77,178 @@ const AccountSetup: NextPage = () => {
     };
 
 
-   return (
-       <AuthChecker>
+    return (
+        <AuthChecker>
             <AuthLayout wide={true}>
-           <div className="nk-content nk-content-fluid">
-                <div className="container-xl wide-lg">
-                    <div className="nk-content-body">
-                        <div className="kyc-app wide-sm m-auto">
-                            <div className="nk-block-head nk-block-head-lg wide-xs mx-auto">
-                                <div className="nk-block-head-content text-center">
-                                    <h2 className="nk-block-title fw-normal">Account Setup</h2>
-                                    <div className="nk-block-des">
-                                        <p>Complete the information below to finish registeration</p>
+                <div className="nk-content nk-content-fluid">
+                    <div className="container-xl wide-lg">
+                        <div className="nk-content-body">
+                            <div className="kyc-app wide-sm m-auto">
+                                <div className="nk-block-head nk-block-head-lg wide-xs mx-auto">
+                                    <div className="nk-block-head-content text-center">
+                                        <h2 className="nk-block-title fw-normal">Account Setup</h2>
+                                        <div className="nk-block-des">
+                                            <p>Complete the information below to finish registeration</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="nk-block">
-                                <div className="card card-bordered">
-                                    <div className="nk-kycfm">
-                                        <form action="" onSubmit={handleSubmit(onSubmit)}>
+                                <div className="nk-block">
+                                    <div className="card card-bordered">
+                                        <div className="nk-kycfm">
+                                            <form action="" onSubmit={handleSubmit(onSubmit)}>
 
-                                            <div className="nk-kycfm-head">
-                                                <div className="nk-kycfm-count">01</div>
-                                                <div className="nk-kycfm-title">
-                                                    <h5 className="title">Personal Details</h5>
-                                                    <p className="sub-title">Your simple personal information required for
-                                                        identification</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="nk-kycfm-content">
-                                                <div className="nk-kycfm-note">
-                                                    <em className="icon ni ni-info-fill" data-bs-toggle="tooltip"
-                                                        data-bs-placement="right" title="Tooltip on right"></em>
-                                                    <p>Please type carefully and fill out the form with your personal
-                                                        details.
-                                                        Your can’t edit these details once you submitted the form.</p>
+                                                <div className="nk-kycfm-head">
+                                                    <div className="nk-kycfm-count">01</div>
+                                                    <div className="nk-kycfm-title">
+                                                        <h5 className="title">Personal Details</h5>
+                                                        <p className="sub-title">Your simple personal information required for
+                                                            identification</p>
+                                                    </div>
                                                 </div>
 
-                                                <div className="row g-4">
-                                                    <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <div className="form-label-group">
-                                                                <label className="form-label">First Name <span
-                                                                    className="text-danger">*</span></label>
+                                                <div className="nk-kycfm-content">
+                                                    <div className="nk-kycfm-note">
+                                                        <em className="icon ni ni-info-fill" data-bs-toggle="tooltip"
+                                                            data-bs-placement="right" title="Tooltip on right"></em>
+                                                        <p>Please type carefully and fill out the form with your personal
+                                                            details.
+                                                            Your can’t edit these details once you submitted the form.</p>
+                                                    </div>
+
+                                                    <div className="row g-4">
+                                                        <div className="col-md-6">
+                                                            <div className="form-group">
+                                                                <div className="form-label-group">
+                                                                    <label className="form-label">First Name <span
+                                                                        className="text-danger">*</span></label>
+                                                                </div>
+                                                                <div className="form-control-group">
+                                                                    <input type="text"
+                                                                        {...register('firstName')}
+                                                                        className={`form-control form-control-lg ${errors.firstName ? 'is-invalid' : ''}`} />
+                                                                    <div className="invalid-feedback">{errors.firstName?.message}</div>
+                                                                </div>
                                                             </div>
-                                                            <div className="form-control-group">
-                                                                <input type="text"
-                                                                    {...register('firstName')}
-                                                                    className={`form-control form-control-lg ${errors.firstName ? 'is-invalid' : ''}`} />
-                                                                <div className="invalid-feedback">{errors.firstName?.message}</div>
+                                                        </div>
+
+                                                        <div className="col-md-6">
+                                                            <div className="form-group">
+                                                                <div className="form-label-group">
+                                                                    <label className="form-label">Last Name <span
+                                                                        className="text-danger">*</span></label>
+                                                                </div>
+                                                                <div className="form-control-group">
+                                                                    <input type="text"
+                                                                        {...register('lastName')}
+                                                                        className={`form-control form-control-lg ${errors.lastName ? 'is-invalid' : ''}`} />
+                                                                    <div className="invalid-feedback">{errors.lastName?.message}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <div className="form-label-group">
-                                                                <label className="form-label">Last Name <span
-                                                                    className="text-danger">*</span></label>
-                                                            </div>
-                                                            <div className="form-control-group">
-                                                                <input type="text"
-                                                                    {...register('lastName')}
-                                                                    className={`form-control form-control-lg ${errors.lastName ? 'is-invalid' : ''}`} />
-                                                                <div className="invalid-feedback">{errors.lastName?.message}</div>
-                                                            </div>
-                                                        </div>
+                                                </div>
+
+                                                <div className="nk-kycfm-head">
+                                                    <div className="nk-kycfm-count">02</div>
+                                                    <div className="nk-kycfm-title">
+                                                        <h5 className="title">Your street</h5>
+                                                        <p className="sub-title">Your simple personal information required for
+                                                            identification</p>
                                                     </div>
                                                 </div>
 
-                                            </div>
-
-                                            <div className="nk-kycfm-head">
-                                                <div className="nk-kycfm-count">02</div>
-                                                <div className="nk-kycfm-title">
-                                                    <h5 className="title">Your street</h5>
-                                                    <p className="sub-title">Your simple personal information required for
-                                                        identification</p>
-                                                </div>
-                                            </div>
-
-                                            <div className="nk-kycfm-content">
-                                                <div className="nk-kycfm-note">
-                                                    <em className="icon ni ni-info-fill" data-bs-toggle="tooltip"
-                                                        data-bs-placement="right" title="Tooltip on right"></em>
-                                                    <p>Your can’t edit these details once you submitted the form.</p>
-                                                </div>
-                                                <div className="row g-4">
-                                                    <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <div className="form-label-group">
-                                                                <label className="form-label">Full street <span
-                                                                    className="text-danger">*</span></label>
-                                                            </div>
-                                                            <div className="form-control-group">
-                                                                <input type="text"
-                                                                    {...register('street')}
-                                                                    className={`form-control form-control-lg ${errors.street ? 'is-invalid' : ''}`} />
-                                                                <div className="invalid-feedback">{errors.street?.message}</div>
+                                                <div className="nk-kycfm-content">
+                                                    <div className="nk-kycfm-note">
+                                                        <em className="icon ni ni-info-fill" data-bs-toggle="tooltip"
+                                                            data-bs-placement="right" title="Tooltip on right"></em>
+                                                        <p>Your can’t edit these details once you submitted the form.</p>
+                                                    </div>
+                                                    <div className="row g-4">
+                                                        <div className="col-md-6">
+                                                            <div className="form-group">
+                                                                <div className="form-label-group">
+                                                                    <label className="form-label">Full street <span
+                                                                        className="text-danger">*</span></label>
+                                                                </div>
+                                                                <div className="form-control-group">
+                                                                    <input type="text"
+                                                                        {...register('street')}
+                                                                        className={`form-control form-control-lg ${errors.street ? 'is-invalid' : ''}`} />
+                                                                    <div className="invalid-feedback">{errors.street?.message}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                     <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <div className="form-label-group">
-                                                                <label className="form-label">State <span
-                                                                    className="text-danger">*</span></label>
-                                                            </div>
-                                                            <div className="form-control-group">
-                                                                   <select
-                                                                    defaultValue={'--Select State--'}
-                                                                    {...register('state')}
-                                                                    className={`form-control form-control-lg  ${errors.state ? 'is-invalid' : ''}`}
-                                                                    onChange={handleStateChange}>
-                                                                    <option selected value={'--Select State--'}>--Select State--</option>
-                                                                    {
-                                                                        data?.getStateAndCities?.map((value:any, index: any) =>
-                                                                            <option value={value.state.name} key={index}>{value.state.name}</option>
-                                                                        )
-                                                                    }
-                                                                </select>
-                                                                <div className="invalid-feedback">{errors.state?.message}</div>
+                                                        <div className="col-md-6">
+                                                            <div className="form-group">
+                                                                <div className="form-label-group">
+                                                                    <label className="form-label">State <span
+                                                                        className="text-danger">*</span></label>
+                                                                </div>
+                                                                <div className="form-control-group">
+                                                                    <select
+                                                                        defaultValue={'--Select State--'}
+                                                                        {...register('state')}
+                                                                        className={`form-control form-control-lg  ${errors.state ? 'is-invalid' : ''}`}
+                                                                        onChange={handleStateChange}>
+                                                                        <option selected value={'--Select State--'}>--Select State--</option>
+                                                                        {
+                                                                            data?.getStateAndCities?.map((value: any, index: any) =>
+                                                                                <option value={value.state.name} key={index}>{value.state.name}</option>
+                                                                            )
+                                                                        }
+                                                                    </select>
+                                                                    <div className="invalid-feedback">{errors.state?.message}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div className="col-md-6">
-                                                        <div className="form-group">
-                                                            <div className="form-label-group">
-                                                                <label className="form-label">City <span
-                                                                    className="text-danger">*</span></label>
-                                                            </div>
-                                                            <div className="form-control-group">
-                                                                       <select
+                                                        <div className="col-md-6">
+                                                            <div className="form-group">
+                                                                <div className="form-label-group">
+                                                                    <label className="form-label">City <span
+                                                                        className="text-danger">*</span></label>
+                                                                </div>
+                                                                <div className="form-control-group">
+                                                                    <select
                                                                         className={`form-control form-control-lg  ${errors.city ? 'is-invalid' : ''}`}
                                                                         defaultValue={'--Select City--'}
-                                                                         {...register('city')}>
-                                                                            <option selected value={'--Select City--'}>--Select City--</option>
-                                                                            {
-                                                                                cities?.map((value:any, index: any) =>
-                                                                                    <option value={value} key={index}>{value}</option>
-                                                                                )
-                                                                            }
-                                                                        </select>
-                                                                <div className="invalid-feedback">{errors.city?.message}</div>
+                                                                        {...register('city')}>
+                                                                        <option selected value={'--Select City--'}>--Select City--</option>
+                                                                        {
+                                                                            cities?.map((value: any, index: any) =>
+                                                                                <option value={value} key={index}>{value}</option>
+                                                                            )
+                                                                        }
+                                                                    </select>
+                                                                    <div className="invalid-feedback">{errors.city?.message}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
+                                                <div className="form-group">
+                                                    <button className="m-4 btn btn-primary btn-lg" disabled={loading}>
+                                                        Complete Profile Setup
+                                                    </button>
+                                                </div>
+                                            </form>
 
-                                            </div>
-                                            <div className="form-group">
-                                                <button className="m-4 btn btn-primary btn-lg" disabled={loading}>
-                                                Complete Profile Setup
-                                            </button>
-                                            </div>
-                                        </form>
-
+                                        </div>
                                     </div>
+
                                 </div>
 
                             </div>
 
                         </div>
-
                     </div>
                 </div>
-            </div>
-    </AuthLayout>
-       </AuthChecker>
-   )
+            </AuthLayout>
+        </AuthChecker>
+    )
 }
 
 export default AccountSetup

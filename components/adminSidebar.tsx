@@ -1,24 +1,27 @@
 import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "../public/images/logo-dark.png"
+import Logo2 from "../public/images/logo-dark2x.png"
 
 const AdminSidebar: FC = () => {
   return (
     <>
       <div className="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
         <div className="nk-sidebar-element nk-sidebar-head">
-          <div className="nk-sidebar-brand">
-            <a href="/" className="logo-link nk-sidebar-logo" style={{ paddingTop: "10vh" }}>
-              <Image className="logo-light logo-img" src="/images/logo.png"
-                // srcSet="/images/logo2x.png 2x"
+          <div className="nk-sidebar-brand" >
+            <a href="/" className="logo-link" style={{ marginTop: "15px" }} >
+              <Image className="logo-light"
+                src={Logo2}
                 alt="logo"
-                width={60}
+                width={20}
                 height={20} />
-              <Image className="logo-dark logo-img" src="/images/logo-dark.png" alt="logo"
-                // srcSet="/images/logo-dark2x.png 2x" alt="logo-dark"
-                width={120}
+              <Image className="logo-dark "
+                src={Logo}
+                alt="logo"
+                width={150}
                 height={50} />
-              <span className="nio-version">Bride City</span>
+              <span style={{ fontSize: "16px", fontWeight: "600" }}>Bride City</span>
             </a>
           </div>
           <div className="nk-menu-trigger me-n2">
@@ -39,6 +42,16 @@ const AdminSidebar: FC = () => {
                         <span className="nk-menu-icon"><em className="icon ni ni-home"></em></span>
                         <span className="nk-menu-text">DashBoard</span>
                       </a>
+                    </Link>
+                  </li>
+                  <li className="nk-menu-item">
+                    <Link href="/admin/attendant">
+                      <a href="" className="nk-menu-link">
+                        <span className="nk-menu-icon"><em
+                          className="icon ni ni-users"></em></span>
+                        <span className="nk-menu-text">Attendant</span>
+                      </a>
+
                     </Link>
                   </li>
 

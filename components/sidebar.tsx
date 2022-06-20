@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
+import Logo from "../public/images/logo-dark.png"
+import Logo2 from "../public/images/logo-dark2x.png"
 
 const Sidebar: FC = () => {
 
@@ -10,20 +12,19 @@ const Sidebar: FC = () => {
         <div className="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
             <div className="nk-sidebar-element nk-sidebar-head">
                 <div className="nk-sidebar-brand">
-                    <Link href={'/'}>
-                        <a className="logo-link nk-sidebar-logo" style={{ paddingTop: "10vh" }}>
-                        <Image className="logo-light logo-img" src="/images/logo.png"
-                            // srcSet="/images/logo2x.png 2x"
+                    <a href="/" className="logo-link" style={{ marginTop: "15px" }} >
+                        <Image className="logo-light"
+                            src={Logo2}
                             alt="logo"
-                            width={60}
+                            width={20}
                             height={20} />
-                        <Image className="logo-dark logo-img" src="/images/logo-dark.png" alt="logo"
-                            // srcSet="/images/logo-dark2x.png 2x" alt="logo-dark"
-                            width={120}
+                        <Image className="logo-dark "
+                            src={Logo}
+                            alt="logo"
+                            width={150}
                             height={50} />
-                        <span className="nio-version">Bride City</span>
+                        <span style={{ fontSize: "16px", fontWeight: "600" }}>Bride City</span>
                     </a>
-                    </Link>
                 </div>
                 <div className="nk-menu-trigger me-n2">
                     <a href="#" className="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em
