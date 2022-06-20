@@ -6,6 +6,7 @@ import { LOGOUT } from "../graphql/mutations";
 import { GET_CURRENT_USER } from "../graphql/queries";
 import { User } from "../graphql/types";
 import Logo from "./logo";
+import {toCurrency} from "../utils/formatter";
 
 
 const Header: FC = () => {
@@ -78,11 +79,22 @@ const Header: FC = () => {
                                                     <span className="sub-text">{user?.email}</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="dropdown-inner user-account-info">
-                                            <h6 className="overline-title-alt">Account Balance</h6>
-                                            <div className="user-balance">100,000 <small
-                                                className="currency currency-btc">NGN</small></div>
+                                        </a>
+                                        <div className="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
+                                            <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                                <div className="user-card">
+                                                    <div className="user-avatar">
+                                                        <span>AB</span>
+                                                    </div>
+                                                    <div className="user-info">
+                                                        <span className="lead-text capitalize">{user?.profile?.firstName + ' ' + user?.profile?.lastName}</span>
+                                                        <span className="sub-text">{user?.email}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="dropdown-inner user-account-info">
+                                                <h6 className="overline-title-alt">Account Balance</h6>
+                                                <div className="user-balance">{toCurrency(100000)} </div>
 
                                             <a href="#" className="link"><span>Withdraw Funds</span> <em
                                                 className="icon ni ni-wallet-out"></em></a>
