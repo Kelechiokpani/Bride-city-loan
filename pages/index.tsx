@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+// import type { NextPage } from 'next'
 import Link from 'next/link';
 import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
@@ -7,7 +7,8 @@ import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../graphql/queries';
 import { useEffect, useState } from 'react';
 import { User } from '../graphql/types';
-const Home: NextPage = () => {
+
+const Home:NextPage = () => {
     const { data: currentUser, loading: loadingCurrentUser } = useQuery(GET_CURRENT_USER);
 
     const [user, setUser] = useState<User>()

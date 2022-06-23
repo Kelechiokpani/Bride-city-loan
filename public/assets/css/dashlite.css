@@ -34955,7 +34955,12 @@ button.close {
 .tb-tnx-action {
   width: 60px;
   text-align: right;
+  cursor: pointer;
 }
+.pi{
+  font-size: 1em;
+}
+
 .tb-tnx-action .dropdown {
   margin-top: -0.25rem;
   margin-bottom: -0.25rem;
@@ -34966,6 +34971,8 @@ button.close {
 .tb-tnx-btns + .dropdown {
   margin-left: 1rem;
 }
+
+
 
 @media (max-width: 767px) {
   .tb-tnx-item, .tb-tnx-head {
