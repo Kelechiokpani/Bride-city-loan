@@ -1,14 +1,13 @@
 // import type { NextPage } from 'next'
 import Link from 'next/link';
-import { NextRouter, useRouter } from "next/router";
 import DashboardLayout from "../components/Layouts/dashboard";
-import TransactionsList from "../components/AttendantLog";
 import { useQuery } from '@apollo/client';
 import { GET_CURRENT_USER } from '../graphql/queries';
 import { useEffect, useState } from 'react';
 import { User } from '../graphql/types';
-
-const Home:NextPage = () => {
+import {toCurrency} from "../utils/formatter";
+import ApplicationLog from "../components/userlogs/ApplicationLog";
+const Home: NextPage = () => {
     const { data: currentUser, loading: loadingCurrentUser } = useQuery(GET_CURRENT_USER);
 
     const [user, setUser] = useState<User>()
@@ -67,37 +66,22 @@ const Home:NextPage = () => {
 
                                 </div>
 
-                                <div className="nk-block">
-                                    <div className="row gy-gs">
-                                        <div className="col-lg-5 col-xl-4">
-                                            <div className="nk-block">
-                                                <div className="nk-block-head-xs">
-                                                    <div className="nk-block-head-content">
-                                                        <h5 className="nk-block-title title">Overview</h5>
-                                                    </div>
-                                                </div>
-
-                                                <div className="nk-block">
-                                                    <div className="card card-bordered text-light is-dark h-100">
-                                                        <div className="card-inner">
-                                                            <div className="nk-wg7">
-                                                                <div className="nk-wg7-stats">
-                                                                    <div className="nk-wg7-title">Available balance in USD</div>
-                                                                    <div className="number-lg amount">179,850.950</div>
-                                                                </div>
-                                                                <div className="nk-wg7-stats-group">
-                                                                    <div className="nk-wg7-stats w-50">
-                                                                        <div className="nk-wg7-title">Wallets</div>
-                                                                        <div className="number-lg">5</div>
-                                                                    </div>
-                                                                    <div className="nk-wg7-stats w-50">
-                                                                        <div className="nk-wg7-title">Transactions</div>
-                                                                        <div className="number">34,405</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="nk-wg7-foot">
-                                                                    <span className="nk-wg7-note">Last activity at <span>19 Nov, 2019</span></span>
-                                                                </div>
+                                        <div className="nk-block">
+                                            <div className="card card-bordered text-light is-dark h-100">
+                                                <div className="card-inner">
+                                                    <div className="nk-wg7">
+                                                        <div className="nk-wg7-stats">
+                                                            <div className="nk-wg7-title">Available balance in USD</div>
+                                                            <div className="number-lg amount">{toCurrency(179850.950)}</div>
+                                                        </div>
+                                                        <div className="nk-wg7-stats-group">
+                                                            <div className="nk-wg7-stats w-50">
+                                                                <div className="nk-wg7-title">Wallets</div>
+                                                                <div className="number-lg">5</div>
+                                                            </div>
+                                                            <div className="nk-wg7-stats w-50">
+                                                                <div className="nk-wg7-title">Transactions</div>
+                                                                <div className="number">34,405</div>
                                                             </div>
 
                                                         </div>
@@ -118,41 +102,35 @@ const Home:NextPage = () => {
                                                     </div>
                                                 </div>
 
-                                                <div className="row g-gs">
-                                                    <div className="col-md-6">
-                                                        <div className="card card-bordered card-full">
-                                                            <div className="card-inner">
-                                                                <div className="card-title-group align-start mb-0">
-                                                                    <div className="card-title">
-                                                                        <h6 className="subtitle">Total amount</h6>
-                                                                    </div>
-                                                                    <div className="card-tools">
-                                                                        <em className="card-hint icon ni ni-help-fill"
-                                                                            data-toggle="tooltip" data-placement="left"
-                                                                            title="Total Deposited"></em>
+                                        <div className="row g-gs">
+                                            <div className="col-md-6">
+                                                <div className="card card-bordered card-full">
+                                                    <div className="card-inner">
+                                                        <div className="card-title-group align-start mb-0">
+                                                            <div className="card-title">
+                                                                <h6 className="subtitle">Total amount</h6>
+                                                            </div>
+                                                            <div className="card-tools">
+                                                                <em className="card-hint icon ni ni-help-fill"
+                                                                    data-toggle="tooltip" data-placement="left"
+                                                                    title="Total Deposited"></em>
+                                                            </div>
+                                                        </div>
+                                                        <div className="card-amount">
+                                                            <span className="amount"> {toCurrency(2000)}</span>
+                                                        </div>
+                                                        <div className="invest-data">
+                                                            <div className="invest-data-amount g-2">
+                                                                <div className="invest-data-history">
+                                                                    <div className="title">This Month</div>
+                                                                    <div
+                                                                        className="amount">{toCurrency(40)}
                                                                     </div>
                                                                 </div>
-                                                                <div className="card-amount">
-                                                                    <span className="amount"> 2000</span>
-                                                                </div>
-                                                                <div className="invest-data">
-                                                                    <div className="invest-data-amount g-2">
-                                                                        <div className="invest-data-history">
-                                                                            <div className="title">This Month</div>
-                                                                            <div
-                                                                                className="amount">40
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="invest-data-history">
-                                                                            <div className="title">This Week</div>
-                                                                            <div
-                                                                                className="amount">3,000
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="invest-data-ck">
-                                                                        <canvas className="iv-data-chart"
-                                                                            id="totalDeposit"></canvas>
+                                                                <div className="invest-data-history">
+                                                                    <div className="title">This Week</div>
+                                                                    <div
+                                                                        className="amount">{toCurrency(3000)}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -160,12 +138,30 @@ const Home:NextPage = () => {
 
                                                     </div>
 
-                                                    <div className="col-md-6">
-                                                        <div className="card card-bordered card-full">
-                                                            <div className="card-inner">
-                                                                <div className="card-title-group align-start mb-0">
-                                                                    <div className="card-title">
-                                                                        <h6 className="subtitle">Total Withdrawals</h6>
+                                            <div className="col-md-6">
+                                                <div className="card card-bordered card-full">
+                                                    <div className="card-inner">
+                                                        <div className="card-title-group align-start mb-0">
+                                                            <div className="card-title">
+                                                                <h6 className="subtitle">Total Withdrawals</h6>
+                                                            </div>
+                                                            <div className="card-tools">
+                                                                <em className="card-hint icon ni ni-help-fill"
+                                                                    data-toggle="tooltip" data-placement="left"
+                                                                    title="Total Transfer"></em>
+                                                            </div>
+                                                        </div>
+                                                        <div className="card-amount">
+                                                            <span className="amount">
+                                                                6,000
+                                                            </span>
+                                                        </div>
+                                                        <div className="invest-data">
+                                                            <div className="invest-data-amount g-2">
+                                                                <div className="invest-data-history">
+                                                                    <div className="title">This Month</div>
+                                                                    <div
+                                                                        className="amount">{toCurrency(10000)}
                                                                     </div>
                                                                     <div className="card-tools">
                                                                         <em className="card-hint icon ni ni-help-fill"
@@ -178,24 +174,10 @@ const Home:NextPage = () => {
                                                                         6,000
                                                                     </span>
                                                                 </div>
-                                                                <div className="invest-data">
-                                                                    <div className="invest-data-amount g-2">
-                                                                        <div className="invest-data-history">
-                                                                            <div className="title">This Month</div>
-                                                                            <div
-                                                                                className="amount">10,000
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="invest-data-history">
-                                                                            <div className="title">This Week</div>
-                                                                            <div
-                                                                                className="amount">12,000
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="invest-data-ck">
-                                                                        <canvas className="iv-data-chart"
-                                                                            id="totalWithdraw"></canvas>
+                                                                <div className="invest-data-history">
+                                                                    <div className="title">This Week</div>
+                                                                    <div
+                                                                        className="amount">{toCurrency(12000)}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -209,22 +191,17 @@ const Home:NextPage = () => {
 
                                     </div>
 
-                                </div>
-                                {/* Transactions Here */}
-                                <TransactionsList />
-                                <div className="nk-block">
-                                    <div className="card card-bordered">
-                                        <div className="nk-refwg">
-                                            <div className="nk-refwg-invite card-inner">
-                                                <div className="nk-refwg-head g-3">
-                                                    <div className="nk-refwg-title">
-                                                        <h5 className="title">Refer Us & Earn</h5>
-                                                        <div className="title-sub">Use the bellow link to invite your friends.
-                                                        </div>
-                                                    </div>
-                                                    <div className="nk-refwg-action">
-                                                        <a href="#" className="btn btn-primary">Invite</a>
-                                                    </div>
+                        </div>
+                        {/* Transactions Here */}
+                       <ApplicationLog/>
+                        <div className="nk-block">
+                            <div className="card card-bordered">
+                                <div className="nk-refwg">
+                                    <div className="nk-refwg-invite card-inner">
+                                        <div className="nk-refwg-head g-3">
+                                            <div className="nk-refwg-title">
+                                                <h5 className="title">Refer Us & Earn</h5>
+                                                <div className="title-sub">Use the bellow link to invite your friends.
                                                 </div>
                                                 <div className="nk-refwg-url">
                                                     <div className="form-control-wrap">
