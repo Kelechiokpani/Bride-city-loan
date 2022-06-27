@@ -88,10 +88,12 @@ export const LOAN_APPLICATIONS = gql`
 `;
 
 
-export const GET_EDITDETAILS  = gql `
-query GetEditDetails {
-  id
-  text
-}
+export const GET_LOANAPPROVAL = gql`
+query GetLoanApproval{
+   id
+   approvalStatus
+   approvalAmount
+   attendant
 
+}
 `

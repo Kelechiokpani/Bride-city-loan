@@ -1,24 +1,26 @@
-import { FC, NextPage } from "next";
+import { FC, useMemo } from "react";
 import "primeicons/primeicons.css";
 import React, { useContext, useState, useEffect } from "react";
 import { LoanContext } from "./context/LoanContext";
-// import { Button } from "primereact/button";
-import { Dialog } from "primereact/dialog";
+
 import EditLoan from "./adminlogs/EditLoan";
-import { boolean } from "yup";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
+import { ADMIN_LOANAPPROVAL } from "../graphql/mutations";
+import { useMutation } from "@apollo/client";
 
 const AdminApplicationList: FC = () => {
   const { loanapproval } = useContext(LoanContext);
+
   const [modal, setModal] = React.useState(false);
-  const [displayBasic, setdisplayBasic] = useState(false);
+  const [select, setSelect] = useState({});
+
+  const handleClose = () => setModal(false);
+  useEffect(() => {
+    handleClose();
+  }, [loanapproval]);
 
   const toggle = () => setModal(!modal);
-  const [show, setShow] = useState(false);
-
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   return (
     <div className="nk-block">
@@ -167,8 +169,9 @@ const AdminApplicationList: FC = () => {
                       <div className="tb-tnx-desc">
                         <span className="title">{loandata.customerName}</span>
                       </div>
+
                       <div className="tb-tnx-desc">
-                        <span className="title">{loandata.loanCatergory}</span>
+                        <span className="title">{loandata.loanCategory}</span>
                       </div>
                     </td>
 
@@ -176,18 +179,16 @@ const AdminApplicationList: FC = () => {
                       <div className="tb-tnx-total">
                         <span className="amount">{loandata.loanAmount}</span>
                       </div>
+
                       <div className="tb-tnx-status">
-                        <span className="badge badge-dot bg-warning">
-                          {loandata.approvalstatus}
+                        <span className="badge badge-dot bg-primary">
+                          {loandata.approvalStatus}
                         </span>
                       </div>
                     </td>
                     <td className="tb-tnx-amount is-alt">
-                      <div className="tb-tnx-total">
-                        <span className="amount">
-                          {" "}
-                          {loandata.approvalAmount}
-                        </span>
+                      <div className="tb-tnx-status">
+                        <span className="title">{loandata.approvalAmount}</span>
                       </div>
                       <div className="tb-tnx-status">
                         <span className="title">{loandata.attendant}</span>
@@ -198,39 +199,33 @@ const AdminApplicationList: FC = () => {
                       <Button
                         style={{ marginRight: "1rem" }}
                         className="btn text-warning btn-act"
-                        // onClick={handleShow}
-                        onClick={toggle}
+                        onClick={() => {
+                          setSelect(loandata);
+                          toggle();
+                        }}
                       >
                         <i className="pi pi-user-edit" />
                         <span>Edit</span>
                       </Button>
                     </td>
-                    <td className="tb-tnx-action">
-                      <Button
-                        className="btn text-danger btn-act"
-                        data-toggle="modal"
-                        onClick={toggle}
-                      >
-                        <i className="pi pi-trash" />
-                      </Button>
-                    </td>
-                    <Modal show={show} isOpen={modal} toggle={toggle}>
-                      <ModalHeader toggle={toggle}>Loan Approval</ModalHeader>
-                      <ModalBody>
-                        <EditLoan />
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button color="secondary" onClick={toggle}>
-                          Cancel
-                        </Button>
-                      </ModalFooter>
-                    </Modal>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
+          <Modal isOpen={modal} toggle={toggle}>
+            <ModalHeader toggle={toggle}>Loan Approval</ModalHeader>
+            <ModalBody>
+              <EditLoan loaninfo={select} />
+            </ModalBody>
+
+            <ModalFooter>
+              <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
           <div className="card-inner">
             <ul className="pagination justify-content-center justify-content-md-start">
               <li className="page-item">

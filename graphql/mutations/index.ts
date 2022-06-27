@@ -47,7 +47,7 @@ mutation UpdatePerson($data: updatePersonInput!) {
 // personal Form---------------
 export const LOAN_APPLICATION = gql`
 mutation  LoanApplication(
-    $category: ID!
+    $category: string!
     $applicationAmount: Int!
     ) {
     applyLoan(
@@ -58,12 +58,17 @@ mutation  LoanApplication(
         )
 }
 `
-// Edit modal
-export const EDIT_USERDETAILS =gql`
-    mutation EditUserDetail($id : string $text : string){
-        editUserDetail(id: $id text: $text){
-        id
-        text
+
+export const ADMIN_LOANAPPROVAL = gql`
+    mutation AdminLoanApproval(
+        $id : string  
+        $approvalStatus : string
+        $approvalAmount : string
+        $attendant : string
+        ){ 
+            loanapproval(id:  $id 
+                approvalStatus: $approvalStatus
+                approvalAmount: $approvalAmount 
+                attendant: $attendant)
         }
-    }
 `
