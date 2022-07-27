@@ -28,6 +28,7 @@ const Header: FC = () => {
       <div className="nk-header nk-header-fluid nk-header-fixed is-light">
         <div className="container-fluid">
           <div className="nk-header-wrap">
+
             <div className="nk-menu-trigger d-xl-none ms-n1">
               <a
                 href="/admin"
@@ -60,6 +61,7 @@ const Header: FC = () => {
                 </a>
               </div>
             </div>
+
             <div className="nk-header-tools">
               <ul className="nk-quick-nav">
                 <li className="dropdown user-dropdown">
@@ -104,7 +106,8 @@ const Header: FC = () => {
                                             </div>
                                         </div>
                                     </a>
-                                    <div className="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
+
+                                  <div className="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
                                         <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                             <div className="user-card">
                                                 <div className="user-avatar">
@@ -115,7 +118,9 @@ const Header: FC = () => {
                                                     <span className="sub-text">{user?.email}</span>
                                                 </div>
                                             </div>
-                                        </a>
+                                        
+                                        </div>
+                                      
                                         <div className="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
                                             <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                                 <div className="user-card">
@@ -174,12 +179,13 @@ const Header: FC = () => {
                                         </div>
                                     </div>
                                 </li>
+                                
                                 <li className="dropdown notification-dropdown me-n1">
                                     <a href="#" className="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
                                         <div className="icon-status icon-status-info"><em
                                             className="icon ni ni-bell"></em></div>
                                     </a>
-                                    <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
+                                  <div className="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
                                         <div className="dropdown-head">
                                             <span className="sub-title nk-dropdown-title">Notifications</span>
                                             <a href="#">Mark All as Read</a>
@@ -209,7 +215,7 @@ const Header: FC = () => {
                                                         <div className="nk-notification-time">2 hrs ago</div>
                                                     </div>
                                                 </div>
-
+                                          </div>
                       <a href="#" className="link">
                         <span>Withdraw Funds</span>{" "}
                         <em className="icon ni ni-wallet-out"></em>
@@ -254,7 +260,8 @@ const Header: FC = () => {
                       </ul>
                     </div>
                   </div>
-                </li>
+                                 </li>
+                
                 <li className="dropdown notification-dropdown me-n1">
                   <a
                     href="#"
@@ -366,9 +373,21 @@ const Header: FC = () => {
                   </div>
                 </li>
               </ul>
+              </div>
+              </div>
+            
+              </div>
+              </div>
+              </li>
+              </ul>
             </div>
+          
+            
           </div>
+          
         </div>
+      
+      
       </div>
       {/*main header @e*/}
     </>

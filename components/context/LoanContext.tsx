@@ -1,8 +1,10 @@
 import { createContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+
+
 export const LoanContext = createContext();
 
-const LoanContextProvider = (props) => {
+const LoanContextProvider = (props:any) => {
   const [loanapproval, setLoanApproval] = useState([
     {
       id: uuidv4(),
@@ -33,7 +35,7 @@ const LoanContextProvider = (props) => {
     },
   ]);
 
-  const updateLoanApproval = (id, updateLoanApproval) => {
+  const updateLoanApproval = (id: any, updateLoanApproval: any) => {
     setLoanApproval(
       loanapproval.map((loandata) =>
         loandata.id === id ? updateLoanApproval : loandata

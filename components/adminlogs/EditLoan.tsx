@@ -6,7 +6,6 @@ import { useContext, useState } from "react";
 
 const EditLoan = ({ loaninfo }: any) => {
   const id = loaninfo.id;
-
   const [customerName, setCustomerName] = useState(loaninfo.customerName);
   const [loanCategory, setLoanCategory] = useState(loaninfo.loanCategory);
   const [loanAmount, setLoanAmount] = useState(loaninfo.loanAmount);
@@ -28,9 +27,7 @@ const EditLoan = ({ loaninfo }: any) => {
     attendant,
     loanRequirement,
   };
-  // const [updatedLoanApproval, { loading }] = useMutation<{
-
-  // }>(ADMIN_LOANAPPROVAL);
+  
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
